@@ -8,6 +8,8 @@
 
 import UIKit
 import SwiftyJSON
+import Alamofire
+
 class RegisterViewTable: UITableViewController, UITextFieldDelegate {
     
     var RegisterPhone : UITextField?
@@ -49,10 +51,10 @@ class RegisterViewTable: UITableViewController, UITextFieldDelegate {
     
     var remainingSeconds: Int = 0 {
         willSet {
-            SendButton?.setTitle("(\(newValue)秒后重新获取)", for: .normal)
+            SendButton?.setTitle("(\(newValue)秒)", for: .normal)
             
             if newValue <= 0 {
-                SendButton?.setTitle("重新获取验证码", for: .normal)
+//                SendButton?.setTitle("重新获取验证码", for: .normal)
                 isCounting = false
             }
         }
@@ -128,11 +130,21 @@ class RegisterViewTable: UITableViewController, UITextFieldDelegate {
         print("注册得到的数据 = ",data)
     }
     
-    @objc func sendCode(_ sender: UIButton) -> Void {
-        let phone = RegisterPhone?.text
-        let post = ["phone":phone!]
-        isCounting = true
+    func sendCodeCall(data: JSON) -> Bool{
+        print("注册得到的数据12 = ",data)
         
+        return true
+    }
+    
+    @objc func sendCode(_ sender: UIButton) -> Void {
+        let phone = RegisterPhone?.text as! String
+        var par = Parameters()
+        par["phoneoreamil"] = phone
+        par["codetype"] = 102
+        
+        isCounting = true
+        print(phone)
+        Http.Post(url: Http.sendregistercode, data: par, call: sendCodeCall)
       
     }
     

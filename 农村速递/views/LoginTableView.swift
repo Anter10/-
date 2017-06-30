@@ -188,7 +188,8 @@ class LoginTableView: BaseTableViewController , UIGestureRecognizerDelegate, UIT
     
     
     func logincallback(data: JSON) -> Bool {
-        
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.pushViewController(TabBarScene(), animated: true)
         print("登陆数据回调 ",data)
         return true
     }

@@ -23,9 +23,12 @@ class Http  {
         }
     }
     
-//    请求文本显示
-    static let getshows: String = Http.postip + "getappshow"
-//    请求登陆
-    static let loginurl: String =  Http.postip + "postlogin"
-    
+    //    请求文本显示
+    static let getshows: String  = Http.postip + "getappshow"
+    //    请求登陆
+    static let loginurl: String  =  Http.postip + "postlogin"
+    //    修改用户信息
+    static let changemsg: String =  Http.postip + "changepersonmessage"
+    //    注册的时候发送验证码
+    static let sendregistercode : String = Http.postip + "getcode"
 }

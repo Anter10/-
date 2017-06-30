@@ -58,16 +58,27 @@ class EditView: BaseTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var showview  = BaseTableViewController()
+        var showview:BaseTableViewController? = nil
         
         if (indexPath.section == 0 && indexPath.row == 0){
+            
+        }
+        if UserData.getUD().editdata.editids[indexPath.section][indexPath.row] == 103{
+//           showview = LoginTableView()
+//           self.navigationController?.setNavigationBarHidden(true, animated:false)
+        }else if UserData.getUD().editdata.editids[indexPath.section][indexPath.row] == 101{
            showview = VerityIdCardView()
         }
-        showview.title = UserData.getUD().editdata.edits[indexPath.section][indexPath.row]
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: UserData.appshowtexts[6], style: UIBarButtonItemStyle.plain, target: self, action: nil)
+        if showview != nil{
+           showview?.title = UserData.getUD().editdata.edits[indexPath.section][indexPath.row]
+           self.navigationItem.backBarButtonItem = UIBarButtonItem(title: UserData.appshowtexts[6], style: UIBarButtonItemStyle.plain, target: self, action: nil)
+           self.navigationController?.pushViewController(showview!, animated: true)
+        }
         
-        self.navigationController?.pushViewController(showview, animated: true)
     }
+    
+    
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
