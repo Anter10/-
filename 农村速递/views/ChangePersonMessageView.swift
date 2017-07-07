@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SwiftyJSON
+import Alamofire
 
 class ChangePersonMessageView: BaseTableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     var changetag : Int = 0
@@ -60,14 +62,33 @@ class ChangePersonMessageView: BaseTableViewController, UIPickerViewDelegate, UI
         return String(row) + "_ " + String(component)
     }
     
+    func changeback(data: JSON) -> Bool {
+        
+        UserData.getUD().personmsg.setValueByTag(tag: changetag, msg1: curchangevalue)
+        self.navigationController?.popViewController(animated: true)
+        print("登陆数据回调 ",data)
+        return true
+    }
+    
+    
     @objc func changeMessage(sender: UIBarButtonItem) {
         var changvalue = changeText.text!
         if changetag == 105 {
            changvalue = curchangevalue
         }
+        curchangevalue = changvalue
         print("修改后的内容 = ",changvalue)
-        UserData.getUD().personmsg.setValueByTag(tag: changetag, msg1: changvalue)
-        self.navigationController?.popViewController(animated: true)
+        let changetype:  String  = String(changetag)
+        let msgs: String  = changvalue
+        let userid: String = UserData.getUD().personmsg.phone
+        var per  = Parameters()
+        per["changetype"]         = changetype
+        per["msgs"]  = msgs
+        per["userid"]        = userid
+        
+        Http.Post(url: Http.changemsg, data: per, call: changeback)
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -99,18 +120,18 @@ class ChangePersonMessageView: BaseTableViewController, UIPickerViewDelegate, UI
          cell.tag = changetag
          if changetag == 105{
             if indexPath.row == 0 {
-               cell.isSelected = true
                cell.setSelected(true, animated: true)
+               
 //               cell.backgroundColor = UIColor.lightGray
             }
             let Label = UILabel(frame: CGRect(x: 0, y: 10, width: UIScreen.main.bounds.width , height:cell.bounds.height ))
-        
+            
             Label.text = LocalAppData.sex[indexPath.row]
             Label.textAlignment = NSTextAlignment.center
             cell.addSubview(Label)
             
          }else{
-            changeText = UITextField(frame: CGRect(x: 10, y: 10, width: cell.bounds.width - 130, height: cell.bounds.height))
+            changeText = UITextField(frame: CGRect(x: 10, y: 10, width: cell.bounds.width - 10, height: cell.bounds.height))
             changeText.text = curchangevalue
             cell.addSubview(changeText)
             changeText.becomeFirstResponder()
@@ -120,8 +141,10 @@ class ChangePersonMessageView: BaseTableViewController, UIPickerViewDelegate, UI
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("点击的位置1 ",changetag)
         if  changetag == 105{
             curchangevalue = LocalAppData.sex[indexPath.row]
+             print("点击的位置2 ",curchangevalue)
 //            tableView.cellForRow(at: indexPath)?.backgroundColor = UIColor.lightGray
         }
         

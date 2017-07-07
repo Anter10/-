@@ -1,15 +1,19 @@
 //
-//  MyOrderView.swift
+//  SetPasswordView.swift
 //  农村速递
 //
-//  Created by 郭有超 on 2017/6/18.
+//  Created by 郭有超 on 2017/7/4.
 //  Copyright © 2017年 郭有超. All rights reserved.
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
-class MyOrderView: BaseTableViewController {
-
+class SetPasswordView: BaseTableViewController {
+    var RegisterPhone = UITextField();
+    var changetype = "";
+    var changeid   = "";
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,50 +33,74 @@ class MyOrderView: BaseTableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return  UserData.ordershows.count
+        return 1
     }
-
     
-    func deleteRow(action: UITableViewRowAction, indexPath: IndexPath) -> Void{
-        print("删除按钮",indexPath.section, indexPath.row)
-        UserData.getUD().orderdatas.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+    func sendCodeCall(data: JSON) -> Bool{
+        print("zenmehuishi",data[0]["id"])
+        return true
+    }
+    
+    @objc func setpwdcall(_ sender: UIButton){
+        let phone = RegisterPhone.text as! String
+        var par = Parameters()
+        par["changetype"] = "101"
+        par["changeid"] = changeid
+        par["changepwd"] = phone
         
-    }
-    
-    func editRow(action: UITableViewRowAction, indexPath: IndexPath) -> Void{
-        print("设置按钮",indexPath.section, indexPath.row)
+        print(phone)
+        Http.Post(url: Http.changepassword, data: par, call: sendCodeCall)
         
-    }
-    
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteRowAction:UITableViewRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "删除", handler: deleteRow)
-        deleteRowAction.backgroundColor = UIColor.darkGray
-        let editRowAction:UITableViewRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "编辑", handler: editRow)
-        editRowAction.backgroundColor = UIColor.gray
-        return [deleteRowAction, editRowAction];
+        print("注册号码")
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
-        cell.textLabel?.text = String(UserData.ordershows[indexPath.row])
-        cell.textLabel?.textAlignment = NSTextAlignment.left
-        cell.textLabel?.font = UIFont(name: "Arial", size: 18)
-        
-//        let detailLabel = UILabel(frame:  CGRect(x: -10, y: 10, width: UIScreen.main.bounds.width, height: cell.bounds.height))
-//
-//        detailLabel.textAlignment = NSTextAlignment.right
-//        detailLabel.text  = UserData.getUD().linkperson[indexPath.row].phone1
-//        cell.addSubview(detailLabel)
+        let cell = UITableViewCell()
+        let upsize = CGFloat(5)
+        if indexPath.section == 0{
+            RegisterPhone = UITextField(frame: CGRect(x: 125, y: upsize, width: Paramters.InputSize.0, height: Paramters.InputSize.1))
+            let IdLabel = UILabel(frame: CGRect(x: 10, y: upsize, width: 120, height: 40))
+            IdLabel.font = UIFont.boldSystemFont(ofSize: 22)
+            cell.addSubview(IdLabel)
+            IdLabel.text = "设置密码:"
+            cell.addSubview(RegisterPhone)
+            RegisterPhone.font = UIFont.systemFont(ofSize: 18)
+            //                PhoneOrEmailTextField?.borderStyle = UITextBorderStyle.roundedRect
+            
+            RegisterPhone.returnKeyType = UIReturnKeyType.done
+            RegisterPhone.clearButtonMode = .whileEditing
+            RegisterPhone.minimumFontSize=16
+            RegisterPhone.adjustsFontSizeToFitWidth=true
+            RegisterPhone.placeholder = "请输入账号密码"
+            RegisterPhone.keyboardAppearance = .alert
+            RegisterPhone.keyboardType  = .numberPad
+        }else{
+            var LoginButton = UIButton(frame: CGRect(x: 0, y: 15, width: Paramters.LoginButtonSize.0, height: Paramters.LoginButtonSize.1))
+            cell.addSubview(LoginButton)
+            LoginButton.backgroundColor = UIColor.green
+            LoginButton.addTarget(self, action:#selector(setpwdcall(_:)), for:.touchUpInside)
+            //            LoginButton?.titleLabel?.backgroundColor = UIColor.black
+            LoginButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 22)
+            LoginButton.titleLabel?.textColor = UIColor.black
+            LoginButton.setTitle("确定", for: UIControlState.normal)
+        }
+        // Configure the cell...
+
         return cell
     }
- 
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 0{
+            return 10
+        }else{
+            return 0
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.

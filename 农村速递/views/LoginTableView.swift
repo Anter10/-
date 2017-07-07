@@ -15,6 +15,8 @@ class LoginTableView: BaseTableViewController , UIGestureRecognizerDelegate, UIT
     var pwdfield: UITextField = UITextField()
     var tap:UITapGestureRecognizer?
     var LoginButton : UIButton?
+    var uid: String = ""
+    var upwd: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         print("______________________________进入应用__________________")
@@ -43,7 +45,19 @@ class LoginTableView: BaseTableViewController , UIGestureRecognizerDelegate, UIT
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        print("什么情况是事实")
+        // 读取玩家数据
+        let dir = UserData.readDataFromPath(filename: "usermessage.json")
+        let keys = dir.allKeys
+        if keys.count > 0 {
+            uid = dir["id"] as! String
+            upwd = dir["pwd"] as! String
+            var per = Parameters()
+            per["id"]         = uid
+            per["logintype"]  = "101"
+            per["pwd"]        = upwd
+            Http.Post(url: Http.loginurl, data: per, call: logincallback)
+        }
+        print("什么情况是事实",dir)
     }
     //键盘的出现
     @objc func keyBoardWillShow(_ notification: Notification){
@@ -86,6 +100,28 @@ class LoginTableView: BaseTableViewController , UIGestureRecognizerDelegate, UIT
         }
         return 1
     }
+    func logincallback(data: JSON) -> Bool {
+        if data[0]["uphone"].stringValue.characters.count > 0 {
+            UserData.getUD().personmsg.phone = data[0]["uphone"].stringValue
+            UserData.getUD().personmsg.email = data[0]["uemail"].stringValue
+            UserData.getUD().personmsg.address = data[0]["uaddress"].stringValue
+            UserData.getUD().personmsg.name = data[0]["uname"].stringValue
+            UserData.getUD().personmsg.age = data[0]["uage"].stringValue
+            UserData.getUD().personmsg.sex = data[0]["usex"].stringValue
+            UserData.getUD().personmsg.flushMSG()
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            self.navigationController?.pushViewController(TabBarScene(), animated: true)
+            
+            var persondir:NSDictionary = ["id":String(data[0]["uphone"].stringValue),"pwd" : String( data[0]["upassword"].stringValue) ]
+            
+            // 保存账号数据
+            UserData.writeDataToPath(data: persondir, filename: "usermessage.json")
+        }
+        
+        print("登陆数据回调 ",data[0]["uphone"].stringValue.characters.count)
+        return true
+    }
+    
     
     // 登录服务器
     @objc func LoginServer(_ sender: UIButton){
@@ -93,14 +129,11 @@ class LoginTableView: BaseTableViewController , UIGestureRecognizerDelegate, UIT
         let pwd: String  = pwdfield.text!
         var per  = Parameters()
         per["id"]         = id
-        per["logintype"]  = "1"
+        per["logintype"]  = "101"
         per["pwd"]        = pwd
         Http.Post(url: Http.loginurl, data: per, call: logincallback)
-        print("账号 = ",id,"密码 = ",pwd)
         
-        //        let MainBar = MainTabBarTable()
-        //        present(MainBar, animated: false, completion: nil)
-        print("LoginServer")
+        print("per")
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -152,10 +185,12 @@ class LoginTableView: BaseTableViewController , UIGestureRecognizerDelegate, UIT
                     }else{
                        cell.textLabel?.text = "账号"
                     }
-                     idfield.becomeFirstResponder()
+                    idfield.becomeFirstResponder()
                     idfield = UITextField(frame: CGRect(x: 75, y: 10, width: 220, height: 40))
                     idfield.placeholder = "请输入账号"
                     idfield.delegate = self
+                    idfield.text = uid
+                    print("uid = ",uid)
                     cell.addSubview(idfield)
                 }else{
                     if UserData.appshowtexts.count > 0 {
@@ -167,6 +202,8 @@ class LoginTableView: BaseTableViewController , UIGestureRecognizerDelegate, UIT
                     pwdfield.delegate = self
                     pwdfield.placeholder = "请输入密码"
                     pwdfield.isSecureTextEntry = true
+                    idfield.text = upwd
+                    print("upwd = ",upwd)
                     cell.addSubview(pwdfield)
                 }
                 
@@ -187,12 +224,6 @@ class LoginTableView: BaseTableViewController , UIGestureRecognizerDelegate, UIT
     
     
     
-    func logincallback(data: JSON) -> Bool {
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        self.navigationController?.pushViewController(TabBarScene(), animated: true)
-        print("登陆数据回调 ",data)
-        return true
-    }
     
     // 点击更多的时候调用
     @objc func MoreCall(_ sender: UIButton){

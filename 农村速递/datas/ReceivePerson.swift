@@ -11,6 +11,8 @@ class ReceivePerson {
     var phone1 : String = ""
     var phone2 : String = ""
     var name   : String = ""
+    var mainid : String = ""
+    var id     : String = ""
     init() {
         
     }

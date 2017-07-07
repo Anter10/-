@@ -27,15 +27,17 @@ class UserData: NSObject {
     public static var fshowids :[[Int]] = []
     public static var placeholders:[String] = []
     public static var loginshows: Array<String>  = []
+    public static var ordershows:    Array<String>  = []
+    public static var ordershowids: [[Int]] = []
     static func getUD()->UserData{
         return ud
     }
     
     override init() {
         super.init()
-        receiveaddress.addAddress(address: "云南省昭通市镇雄县花朗乡")
-        sendaddress.addAddress(address: "浙江省宁波市")
-        addOrder(id: 110520013, rcname: "王勇", mid: "王聪")
+//        receiveaddress.addAddress(address: "云南省昭通市镇雄县花朗乡")
+//        sendaddress.addAddress(address: "浙江省宁波市")
+//        addOrder(id: 110520013, rcname: "王勇", mid: "王聪")
     }
     
     public func addPerson(name: String, phone1: String, phone2:String) {
@@ -59,7 +61,11 @@ class UserData: NSObject {
     
     public static func readDataFromPath(filename: String) -> NSDictionary {
         let diaryList:String = NSHomeDirectory() + "/Documents/" + filename
-        let listData: NSDictionary = NSDictionary(contentsOfFile: diaryList)!
+        var listData: NSDictionary = NSDictionary()
+        if(FileManager.default.fileExists(atPath: diaryList)){
+           listData = NSDictionary(contentsOfFile: diaryList)!
+        }
+        
         return listData
     }
     

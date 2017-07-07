@@ -9,6 +9,8 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+ 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -28,12 +30,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func callback(data: JSON) -> Bool {
-        print("显示的数据  = ",data["ps"])
+        
         
         // 处理请求得到的数据
         // APP 的显示数据
         // 首页的显示数据
-        let firstdata = data["ps"][1]
+        let firstdata = data[1]
         let fsdata    = firstdata["applan"+UserData.lantype]
         let fiddata    = firstdata["appids"]
         UserData.fshowdics = UserData.converJSONTOStringArray(jsonData: fsdata)
@@ -41,42 +43,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         // 个人中心显示数据
-        let pertdata = data["ps"][0]
+        let pertdata = data[0]
         let psdata    = pertdata["applan"+UserData.lantype]
         let piddata    = pertdata["appids"]
         UserData.showdics = UserData.converJSONTOStringArray(jsonData: psdata)
         UserData.showids  = UserData.converJSONTOIntArray(jsonData: piddata)
         
         // 　个人资料显示
-        let permtdata   = data["ps"][2]
+        let permtdata   = data[2]
         let keys        = permtdata["applan"+UserData.lantype]
         let pmiddata    = permtdata["appids"]
         UserData.getUD().personmsg.keys = UserData.converJSONTOStringArray(jsonData: keys)
         UserData.getUD().personmsg.tags = UserData.converJSONTOIntArray(jsonData: pmiddata)
         
         // 设置里面的显示
-        let edittdata        = data["ps"][3]
+        let edittdata        = data[3]
         let editshows        = edittdata["applan"+UserData.lantype]
         let editshowids      = edittdata["appids"]
         UserData.getUD().editdata.edits = UserData.converJSONTOStringArray(jsonData: editshows)
         UserData.getUD().editdata.editids = UserData.converJSONTOIntArray(jsonData: editshowids)
         
         // 身份验证显示
-        let versdata        = data["ps"][5]
+        let versdata        = data[5]
         UserData.getUD().verificationshows = UserData.converJSONTOStringArray(jsonData: versdata["applan"+UserData.lantype])
         
         // 输入框提示信息
-        let tplaceholders = data["ps"][4]
+        let tplaceholders = data[4]
         UserData.placeholders = UserData.converJSONTOStringArray(jsonData: tplaceholders["applan"+UserData.lantype])
-        print(UserData.placeholders,"当前的显示数据3232 = ",UserData.getUD().personmsg.keys)
+        
         // 基础文本显示
-        let showtexts = data["ps"][6]
+        let showtexts = data[6]
         UserData.appshowtexts = UserData.converJSONTOStringArray(jsonData: showtexts["applan"+UserData.lantype])
-        print(UserData.placeholders,"当前的显示数据3232 = ",UserData.getUD().personmsg.keys)
+        print(UserData.placeholders,"当前的显示数据323112 = ",UserData.appshowtexts)
         
-        let loginshowtexts = data["ps"][7]
+        let loginshowtexts = data[7]
         UserData.loginshows = UserData.converJSONTOStringArray(jsonData: loginshowtexts["applan"+UserData.lantype])
-        
+        // 订单
+        UserData.ordershows = UserData.converJSONTOStringArray(jsonData: data[8]["applan"+UserData.lantype])
+        UserData.ordershowids = UserData.converJSONTOIntArray(jsonData: data[8]["applan"+UserData.lantype])
+        print("ordershows = ", data[8])
         return true
     }
     

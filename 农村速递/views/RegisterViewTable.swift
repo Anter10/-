@@ -54,7 +54,7 @@ class RegisterViewTable: UITableViewController, UITextFieldDelegate {
             SendButton?.setTitle("(\(newValue)秒)", for: .normal)
             
             if newValue <= 0 {
-//                SendButton?.setTitle("重新获取验证码", for: .normal)
+                SendButton?.setTitle("重新获取验证码", for: .normal)
                 isCounting = false
             }
         }
@@ -131,6 +131,19 @@ class RegisterViewTable: UITableViewController, UITextFieldDelegate {
     }
     
     func sendCodeCall(data: JSON) -> Bool{
+         print("zenmehuishi",data[0]["id"])
+        if data[0]["id"].stringValue == "101"{
+           print("zenmehuishi")
+           let setpwd = SetPasswordView()
+           setpwd.changeid = RegisterPhone?.text as! String
+           setpwd.changetype = "101"
+           setpwd.title = "设置密码"
+           self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "注册", style: UIBarButtonItemStyle.plain, target: self, action: nil)
+           self.navigationController?.pushViewController(setpwd, animated: true)
+        }else{
+            
+        }
+        
         print("注册得到的数据12 = ",data)
         
         return true
@@ -150,8 +163,12 @@ class RegisterViewTable: UITableViewController, UITextFieldDelegate {
     
     @objc func RegisterServer(_ sender: UIButton) -> Void {
         let phone = RegisterPhone?.text
-        let code = InputCodeNumber?.text
-        let post = ["phone":phone!,"code":code]
+        let code  = InputCodeNumber?.text
+        var per   = Parameters()
+        per["phoneoremail"] = phone!;
+        per["codetype"]     = "102";
+        per["code"]         = code!;
+        Http.Post(url: Http.verilphoneoreamilcode, data: per, call: sendCodeCall)
         
         
     }

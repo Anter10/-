@@ -8,16 +8,23 @@
 
 import Foundation
 class OrderData {
-    var orderid:          Int    = -1     //订单ID
-    var orderitem:        String = ""     //物品名称
-    var orderprice:       Float  = 0.0    //物品价格
-    var orderpprice:      Float  = 0.0    //物品保价
-    var receivecode:      String = ""     //物品提取码
-    var receiveperson:    String = ""     //收件人名称
-    var receivephone1:    String = ""     //收件人电话1
-    var receivephone2:    String = ""     //收件人电话2
-    var isarivepay:       Bool   = false  // 是否是货到付款
-    var arivepaymoney:    Float = 0.0     // 货到付款多少钱
-    var movepersonid:     String = ""     // 送货人的账号ID
-    
+    var orderid:               Int    = -1     // 订单号\n
+    var orderintotime:         String = ""     // 订单生效时间
+    var orderstartpoint:       String  = ""    // 寄件放
+    var ordersendpeople:       String  = ""    // 收件方
+    var orderreceivepeople:    String = ""     // 寄件人电话
+    var ordersendphone:        String = ""     // 收件人电话
+    var orderreceivephone:     String = ""     // 收件人电话
+    var orderstartwhere:       String = ""     // 寄件地址
+    var ordertargetwhere:      String = ""     // 目的地
+    var orderpostid:           String = ""     // 邮政编码
+    var wishtime:              String = ""     // 预计到达时间
+    var custome:               String = ""     // 运费
+    var protectedprice:        String = ""     // 物品保价
+    var expresstype:           String = ""     // 物品类型
+    var followexpressid:       String = ""     // 物流信息跟踪ID\n
+    var uid:                   String = ""     // 寄件人ID\n
+    var dealpeople:            String = ""     // 订单受理人\n
+    var curmovepeople:         String = ""     // 当前送货人
+    var movepeoplehistory:     String = ""     // 承运人历史
 }

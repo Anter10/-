@@ -30,6 +30,9 @@ class UserMessage {
         msg  = [[name],[phone],[email,address],[sex,age]]
     }
     
+    func flushMSG()-> Void{
+        msg  = [[name],[phone],[email,address],[sex,age]]
+    }
     
     init(){
         msg  = [[name],[phone],[email,address],[sex,age]]
