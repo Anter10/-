@@ -15,6 +15,7 @@ class PersonMessageView: BaseTableViewController {
         print("dddd")
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 1300
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

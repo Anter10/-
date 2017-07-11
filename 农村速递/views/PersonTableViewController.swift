@@ -119,6 +119,8 @@ class PersonTableViewController: BaseTableViewController {
           showview = ReceiverPersonView()
         }else if(cell?.tag == 106){
           showview = EditView()
+        }else if(cell?.tag == 107){
+          showview = AllActivitysView()
         }
         if(cell?.tag != 103){
             showview.title = UserData.showdics[indexPath.section][indexPath.row]

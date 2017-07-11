@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 class Http  {
     // 请求地址
-    static let postip : String = "http://192.168.1.7:8083/hskj-express/"
+    static let postip : String = "http://192.168.3.23:8083/hskj-express/"
     
     // 发送Http请求
     static func Post(url: String, data: Parameters, call:@escaping (JSON)->Bool){
@@ -36,6 +36,15 @@ class Http  {
     static let verilphoneoreamilcode : String = Http.postip + "vailphoneoremailcode"
     //    修改密码
     static let changepassword : String = Http.postip + "changepassword"
+    //    添加联系人
+    static let addreceiveperson : String = Http.postip + "addreceiveperson"
+    //    添加收件地址
+    static let addreceiveaddress : String = Http.postip + "addreceiveaddress"
+    //    发送数据请求
+    static let sendalldataaction : String = Http.postip + "sendalldataaction"
+    //    删除数据请求
+    static let deleteactionaction : String = Http.postip + "deleteactionaction"
+    
     
     
 }

@@ -66,6 +66,8 @@ class EditView: BaseTableViewController {
         if UserData.getUD().editdata.editids[indexPath.section][indexPath.row] == 103{
 //           showview = LoginTableView()
 //           self.navigationController?.setNavigationBarHidden(true, animated:false)
+            exit(0)
+//            self.navigationController?.popToRootViewController(animated: true)
         }else if UserData.getUD().editdata.editids[indexPath.section][indexPath.row] == 101{
            showview = VerityIdCardView()
         }

@@ -8,7 +8,7 @@
 
 import Foundation
 class AddressData {
-    var addresss : [String] = []
+    var addresss : [ReceiveAddressData] = []
     init() {
     }
     
@@ -16,8 +16,12 @@ class AddressData {
        addresss.remove(at: index)
     }
     
-    public func addAddress(address: String) {
+    public func addAddress(address: ReceiveAddressData) {
         addresss.append(address)
     }
     
+    //  清空收获人
+    public func clearReceiveAddress(){
+        addresss = []
+    }
 }

@@ -7,19 +7,29 @@
 //
 
 import UIKit
-
+import Alamofire
+import SwiftyJSON
 class SendItemsView: BaseTableViewController {
-
+    var cells : Array<FieldTableViewCell> = []
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.navigationItem.rightBarButtonItem =  UIBarButtonItem(title: UserData.appshowtexts[10], style: UIBarButtonItemStyle.done, target: self, action:#selector(addReceiveDatas))
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
+    @objc func addReceiveDatas(sender: UIBarButtonItem) {
+        var per = Parameters()
+//        per["mainid"]    = UserData.getUD().personmsg.phone
+//        per["name"]   = cells[0].textfield.text as! String
+//        per["phone1"] = cells[1].textfield.text as! String
+//        per["phone2"] = cells[2].textfield.text as! String
+//        Http.Post(url: Http.addreceiveperson, data: per, call: callback)
+        print(per)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -29,23 +39,29 @@ class SendItemsView: BaseTableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return UserData.senditemshows.count
     }
 
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath:  IndexPath) -> UITableViewCell {
+        
+        let cell = FieldTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
+        cell.placeholder =  String(UserData.senditemshows[indexPath.row])
+        cell.flushShow()
+        cell.showid = UserData.senditemshowids[indexPath.row]
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.textLabel?.text = String(UserData.senditemshows[indexPath.row])
+        cell.textLabel?.textAlignment = NSTextAlignment.left
+        cell.textLabel?.font = UIFont(name: "Arial", size: 18)
+        cells.append(cell)
         return cell
     }
-    */
+ 
 
     /*
     // Override to support conditional editing of the table view.

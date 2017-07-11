@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class ReceiveItemWhere: BaseTableViewController {
 
@@ -19,13 +21,35 @@ class ReceiveItemWhere: BaseTableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        getallData()
     }
     
-    @objc func addReceiveDatas(sender: UIBarButtonItem) {
-        UserData.getUD().receiveaddress.addAddress(address: "什么时间啊")
-        self.tableView.reloadData()
-        
+    func getallData(){
+        var para = Parameters()
+        para["mainid"] = UserData.getUD().personmsg.phone
+        para["tbid"]   = "104"
+        Http.Post(url: Http.sendalldataaction, data: para, call: callback)
     }
+    
+    func callback(data: JSON)-> Bool{
+        UserData.getUD().receiveaddress.clearReceiveAddress()
+        for (_,subJson):(String, JSON) in JSON(parseJSON:data.rawString()!) {
+            let data = ReceiveAddressData(id: subJson["id"].stringValue, mailid: subJson["mailid"].stringValue, mainid: subJson["mainid"].stringValue, province: subJson["province"].stringValue, city: subJson["city"].stringValue, controy: subJson["controy"].stringValue, detail: subJson["detail"].stringValue, addtime: subJson["addtime"].stringValue)
+            UserData.getUD().receiveaddress.addAddress(address: data)
+        }
+        self.tableView.reloadData()
+        return true
+    }
+    @objc func addReceiveDatas(sender: UIBarButtonItem) {
+//        UserData.getUD().receiveaddress.addAddress(address: "什么时间啊")
+//        self.tableView.reloadData()
+         self.navigationController?.pushViewController(AddReceiveAddressView(), animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tableView.reloadData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -40,13 +64,28 @@ class ReceiveItemWhere: BaseTableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        print("地址数量= ",UserData.getUD().receiveaddress.addresss.count)
         return UserData.getUD().receiveaddress.addresss.count
     }
     
+    func deletecallback(data: JSON)-> Bool{
+        print("datadatadatadata = ",data)
+//        UserData.getUD().receiveaddress.removeIndex(index: indexPath.row)
+//        self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+//
+        getallData()
+        return true
+    }
+    
+    
     func deleteRow(action: UITableViewRowAction, indexPath: IndexPath) -> Void{
-        print("删除按钮",indexPath.section, indexPath.row)
-        UserData.getUD().receiveaddress.removeIndex(index: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+        
+        var para = Parameters()
+        para["mainid"] = UserData.getUD().personmsg.phone
+        para["tbid"]   = "104"
+        para["id"]     = UserData.getUD().receiveaddress.addresss[indexPath.row].id
+        
+        Http.Post(url: Http.deleteactionaction, data: para, call: deletecallback)
         
     }
     
@@ -65,11 +104,12 @@ class ReceiveItemWhere: BaseTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "Cell")
+        
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         if indexPath.row == UserData.getUD().receiveaddress.addresss.count{
             
         }else{
-           cell.textLabel?.text = UserData.getUD().receiveaddress.addresss[indexPath.row]
+           cell.textLabel?.text = UserData.getUD().receiveaddress.addresss[indexPath.row].toString()
         }
         return cell
     }

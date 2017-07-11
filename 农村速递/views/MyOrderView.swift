@@ -50,14 +50,14 @@ class MyOrderView: BaseTableViewController {
         
     }
     
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteRowAction:UITableViewRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "删除", handler: deleteRow)
-        deleteRowAction.backgroundColor = UIColor.darkGray
-        let editRowAction:UITableViewRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "编辑", handler: editRow)
-        editRowAction.backgroundColor = UIColor.gray
-        return [deleteRowAction, editRowAction];
-    }
-    
+//    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//        let deleteRowAction:UITableViewRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "删除", handler: deleteRow)
+//        deleteRowAction.backgroundColor = UIColor.darkGray
+//        let editRowAction:UITableViewRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "编辑", handler: editRow)
+//        editRowAction.backgroundColor = UIColor.gray
+//        return [deleteRowAction, editRowAction];
+//    }
+//    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
         cell.selectionStyle = UITableViewCellSelectionStyle.none

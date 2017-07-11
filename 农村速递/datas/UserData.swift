@@ -29,6 +29,14 @@ class UserData: NSObject {
     public static var loginshows: Array<String>  = []
     public static var ordershows:    Array<String>  = []
     public static var ordershowids: [[Int]] = []
+    public static var addreceiveshows : Array<String>  = []
+    public static var addreceiveshowids : [Int]  = []
+    public static var addreceiveaddressshows : Array<String>  = []
+    public static var addreceiveaddresssshowids : [Int]  = []
+    
+    public static var senditemshows: Array<String> = []
+    public static var senditemshowids: [Int] = []
+    
     static func getUD()->UserData{
         return ud
     }
@@ -40,11 +48,21 @@ class UserData: NSObject {
 //        addOrder(id: 110520013, rcname: "王勇", mid: "王聪")
     }
     
-    public func addPerson(name: String, phone1: String, phone2:String) {
+    // 清空收获地址
+    public func clearReceivePerson(){
+        linkperson = []
+    }
+    
+   
+    
+    //  添加收货人
+    public func addPerson(name: String, phone1: String, phone2:String, id: String ,mainid: String ) {
         let person = ReceivePerson()
         person.name   = name
         person.phone1 = phone1
         person.phone2 = phone2
+        person.id     = id
+        person.mainid = mainid
         linkperson.append(person)
     }
     
@@ -105,6 +123,14 @@ class UserData: NSObject {
                 tdata.append(subJson1.intValue)
             }
             data.append(tdata)
+        }
+        return data
+    }
+    
+    public static func converJSONTOIntArray(jsonData: JSON) -> [Int]{
+        var data: Array<Int> = []
+        for (_,subJson):(String, JSON) in JSON(parseJSON:jsonData.rawString()!) {
+            data.append(subJson.intValue)
         }
         return data
     }

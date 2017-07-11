@@ -15,7 +15,7 @@ import SwiftyJSON
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -82,6 +82,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserData.ordershows = UserData.converJSONTOStringArray(jsonData: data[8]["applan"+UserData.lantype])
         UserData.ordershowids = UserData.converJSONTOIntArray(jsonData: data[8]["applan"+UserData.lantype])
         print("ordershows = ", data[8])
+        // 添加联系人
+        UserData.addreceiveshows = UserData.converJSONTOStringArray(jsonData: data[9]["applan"+UserData.lantype])
+       UserData.addreceiveshowids = UserData.converJSONTOIntArray(jsonData: data[9]["appids"])
+       // 添加收件地址
+        UserData.addreceiveaddressshows = UserData.converJSONTOStringArray(jsonData: data[10]["applan"+UserData.lantype])
+        UserData.addreceiveaddresssshowids = UserData.converJSONTOIntArray(jsonData: data[10]["appids"])
+       //  寄件类型
+        UserData.senditemshows = UserData.converJSONTOStringArray(jsonData: data[11]["applan"+UserData.lantype])
+        UserData.senditemshowids = UserData.converJSONTOIntArray(jsonData: data[11]["appids"])
+        
         return true
     }
     

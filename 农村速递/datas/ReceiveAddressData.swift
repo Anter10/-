@@ -9,12 +9,27 @@
 import Foundation
 
 class ReceiveAddressData{
-    var area:     String = ""
-    var province: String = ""
-    var city:     String = ""
-    var msg:      String = ""
-    var code:     String = ""
+    var id:          String = ""
+    var mailid:      String = ""
+    var mainid:      String = ""
+    var province:    String = ""
+    var city:        String = ""
+    var controy:     String = ""
+    var detail:      String = ""
+    var addtime:     String = ""
     
-    init() {
+    init(id: String,mailid: String,mainid: String,province: String,city: String,controy: String,detail: String, addtime: String) {
+        self.id = id;
+        self.mailid = mailid
+        self.mainid = mainid
+        self.province = province
+        self.city = city
+        self.controy = controy
+        self.detail = detail
+        self.addtime = addtime
+    }
+    
+    func toString()-> String{
+        return province + city + controy + detail
     }
 }

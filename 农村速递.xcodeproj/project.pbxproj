@@ -13,6 +13,15 @@
 		01144E0F1F0293F8004CE51B /* CodeViewTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013EB1BB1F0251EE007C6F3E /* CodeViewTable.swift */; };
 		013EB1AB1F0240E2007C6F3E /* Paramters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013EB1AA1F0240E2007C6F3E /* Paramters.swift */; };
 		0148B4051F0AA18C00E4E10F /* SetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0148B4041F0AA18C00E4E10F /* SetPasswordView.swift */; };
+		0154BB161F1086170046EF1F /* AddReceivePersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154BB151F1086170046EF1F /* AddReceivePersonView.swift */; };
+		0154BB2C1F10B4660046EF1F /* FieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154BB2B1F10B4660046EF1F /* FieldTableViewCell.swift */; };
+		0154BB2E1F10C55B0046EF1F /* AddReceiveAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154BB2D1F10C55B0046EF1F /* AddReceiveAddressView.swift */; };
+		0154BB301F10F65E0046EF1F /* AllActivitysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154BB2F1F10F65E0046EF1F /* AllActivitysView.swift */; };
+		0154BB381F11114D0046EF1F /* ReceivePersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154BB371F11114D0046EF1F /* ReceivePersonCell.swift */; };
+		0154BB3A1F11423F0046EF1F /* WillFinishOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154BB391F11423F0046EF1F /* WillFinishOrder.swift */; };
+		0154BB3C1F1142550046EF1F /* FinishOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154BB3B1F1142550046EF1F /* FinishOrder.swift */; };
+		0154BB3E1F1142670046EF1F /* MovingOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154BB3D1F1142670046EF1F /* MovingOrder.swift */; };
+		0154BB7A1F13420D0046EF1F /* ScanLineAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154BB791F13420D0046EF1F /* ScanLineAnimation.swift */; };
 		01764EB91EFAD07D0087E13E /* LoginTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01764EB81EFAD07D0087E13E /* LoginTableView.swift */; };
 		01764EC91EFAD2480087E13E /* TabBarScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01764EC81EFAD2480087E13E /* TabBarScene.swift */; };
 		01E09B8C1EF7BC36003013FF /* ChangePersonMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E09B8B1EF7BC36003013FF /* ChangePersonMessageView.swift */; };
@@ -56,6 +65,18 @@
 		01F2AAC81EF8D71A00CAA659 /* CodeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F2AAC71EF8D71A00CAA659 /* CodeData.swift */; };
 		01F2AACA1EF8D75E00CAA659 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F2AAC91EF8D75E00CAA659 /* Permissions.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		0154BB611F114A910046EF1F /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = sourcecode.swift;
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# $(SWIFT_EXEC)\n";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
 		0110561D1EF828AC00712ADC /* PBXContainerItemProxy */ = {
@@ -224,6 +245,19 @@
 		013EB1BB1F0251EE007C6F3E /* CodeViewTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeViewTable.swift; sourceTree = "<group>"; };
 		013EB1BC1F0251EE007C6F3E /* FindPasswordTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordTable.swift; sourceTree = "<group>"; };
 		0148B4041F0AA18C00E4E10F /* SetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPasswordView.swift; sourceTree = "<group>"; };
+		0154BB151F1086170046EF1F /* AddReceivePersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReceivePersonView.swift; sourceTree = "<group>"; };
+		0154BB2B1F10B4660046EF1F /* FieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldTableViewCell.swift; sourceTree = "<group>"; };
+		0154BB2D1F10C55B0046EF1F /* AddReceiveAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReceiveAddressView.swift; sourceTree = "<group>"; };
+		0154BB2F1F10F65E0046EF1F /* AllActivitysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllActivitysView.swift; sourceTree = "<group>"; };
+		0154BB371F11114D0046EF1F /* ReceivePersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivePersonCell.swift; sourceTree = "<group>"; };
+		0154BB391F11423F0046EF1F /* WillFinishOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WillFinishOrder.swift; sourceTree = "<group>"; };
+		0154BB3B1F1142550046EF1F /* FinishOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishOrder.swift; sourceTree = "<group>"; };
+		0154BB3D1F1142670046EF1F /* MovingOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingOrder.swift; sourceTree = "<group>"; };
+		0154BB551F11475A0046EF1F /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../../../../Downloads/BaiduMap_IOSSDK_v3/thirdlibs/libcrypto.a; sourceTree = "<group>"; };
+		0154BB561F11475B0046EF1F /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = ../../../../Downloads/BaiduMap_IOSSDK_v3/thirdlibs/libssl.a; sourceTree = "<group>"; };
+		0154BB591F1148240046EF1F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		0154BB5E1F1148F90046EF1F /* BMKSwiftDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BMKSwiftDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		0154BB791F13420D0046EF1F /* ScanLineAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanLineAnimation.swift; sourceTree = "<group>"; };
 		017162F41F0A63F50003E180 /* ncsd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ncsd.h; sourceTree = "<group>"; };
 		017162F51F0A63F50003E180 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		017162FF1F0A63F50003E180 /* ncsdTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ncsdTests.swift; sourceTree = "<group>"; };
@@ -338,6 +372,24 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		0154BB541F1147560046EF1F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0154BB591F1148240046EF1F /* AVFoundation.framework */,
+				0154BB551F11475A0046EF1F /* libcrypto.a */,
+				0154BB561F11475B0046EF1F /* libssl.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0154BB681F1341C60046EF1F /* tools */ = {
+			isa = PBXGroup;
+			children = (
+				0154BB791F13420D0046EF1F /* ScanLineAnimation.swift */,
+			);
+			path = tools;
+			sourceTree = "<group>";
+		};
 		017162F31F0A63F50003E180 /* ncsd */ = {
 			isa = PBXGroup;
 			children = (
@@ -378,6 +430,7 @@
 				017162F31F0A63F50003E180 /* ncsd */,
 				017162FE1F0A63F50003E180 /* ncsdTests */,
 				01E6810C1EF5855A0053EF17 /* Products */,
+				0154BB541F1147560046EF1F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -394,6 +447,7 @@
 		01E6810D1EF5855A0053EF17 /* 农村速递 */ = {
 			isa = PBXGroup;
 			children = (
+				0154BB681F1341C60046EF1F /* tools */,
 				01F2AAB81EF8D6F800CAA659 /* Code */,
 				011056341EF82DC500712ADC /* network */,
 				01E681691EF620480053EF17 /* datas */,
@@ -403,6 +457,7 @@
 				01E681171EF5855A0053EF17 /* Assets.xcassets */,
 				01E681191EF5855A0053EF17 /* LaunchScreen.storyboard */,
 				01E6811C1EF5855A0053EF17 /* Info.plist */,
+				0154BB5E1F1148F90046EF1F /* BMKSwiftDemo-Bridging-Header.h */,
 			);
 			path = "农村速递";
 			sourceTree = "<group>";
@@ -453,6 +508,11 @@
 				01764EB81EFAD07D0087E13E /* LoginTableView.swift */,
 				01764EC81EFAD2480087E13E /* TabBarScene.swift */,
 				0148B4041F0AA18C00E4E10F /* SetPasswordView.swift */,
+				0154BB151F1086170046EF1F /* AddReceivePersonView.swift */,
+				0154BB2B1F10B4660046EF1F /* FieldTableViewCell.swift */,
+				0154BB2D1F10C55B0046EF1F /* AddReceiveAddressView.swift */,
+				0154BB2F1F10F65E0046EF1F /* AllActivitysView.swift */,
+				0154BB371F11114D0046EF1F /* ReceivePersonCell.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -468,6 +528,9 @@
 				01E681741EF645000053EF17 /* ReceivePerson.swift */,
 				01E681781EF652FB0053EF17 /* ReceiveAddressData.swift */,
 				01E09B8D1EF7DB45003013FF /* LocalData.swift */,
+				0154BB391F11423F0046EF1F /* WillFinishOrder.swift */,
+				0154BB3B1F1142550046EF1F /* FinishOrder.swift */,
+				0154BB3D1F1142670046EF1F /* MovingOrder.swift */,
 			);
 			path = datas;
 			sourceTree = "<group>";
@@ -532,6 +595,7 @@
 				01E6812A1EF5855A0053EF17 /* Resources */,
 			);
 			buildRules = (
+				0154BB611F114A910046EF1F /* PBXBuildRule */,
 			);
 			dependencies = (
 				01E6812E1EF5855A0053EF17 /* PBXTargetDependency */,
@@ -748,7 +812,9 @@
 			files = (
 				01E681751EF645000053EF17 /* ReceivePerson.swift in Sources */,
 				01E681791EF652FB0053EF17 /* ReceiveAddressData.swift in Sources */,
+				0154BB2C1F10B4660046EF1F /* FieldTableViewCell.swift in Sources */,
 				01E681461EF58CF10053EF17 /* SelectItemsView.swift in Sources */,
+				0154BB381F11114D0046EF1F /* ReceivePersonCell.swift in Sources */,
 				011056361EF82DD400712ADC /* Http.swift in Sources */,
 				01F2AACA1EF8D75E00CAA659 /* Permissions.swift in Sources */,
 				01E681661EF6106E0053EF17 /* CreditView.swift in Sources */,
@@ -760,11 +826,13 @@
 				01144DFF1F0293D1004CE51B /* FindPasswordTable.swift in Sources */,
 				01E681731EF6368A0053EF17 /* AddressData.swift in Sources */,
 				013EB1AB1F0240E2007C6F3E /* Paramters.swift in Sources */,
+				0154BB301F10F65E0046EF1F /* AllActivitysView.swift in Sources */,
 				01764EB91EFAD07D0087E13E /* LoginTableView.swift in Sources */,
 				01E6814A1EF58F670053EF17 /* FirstTableViewController.swift in Sources */,
 				01E681601EF60A800053EF17 /* MyOrderView.swift in Sources */,
 				01E681771EF647330053EF17 /* ReceiverPersonView.swift in Sources */,
 				01E681711EF62DC10053EF17 /* EditData.swift in Sources */,
+				0154BB3C1F1142550046EF1F /* FinishOrder.swift in Sources */,
 				01144E0E1F0293EB004CE51B /* RegisterViewTable.swift in Sources */,
 				01F2AAC81EF8D71A00CAA659 /* CodeData.swift in Sources */,
 				01E681481EF58D200053EF17 /* BaseTableViewController.swift in Sources */,
@@ -772,6 +840,7 @@
 				01E6814C1EF58F760053EF17 /* PersonTableViewController.swift in Sources */,
 				01144E0F1F0293F8004CE51B /* CodeViewTable.swift in Sources */,
 				01E09B8C1EF7BC36003013FF /* ChangePersonMessageView.swift in Sources */,
+				0154BB3E1F1142670046EF1F /* MovingOrder.swift in Sources */,
 				01E681561EF5ABD10053EF17 /* SearchResultView.swift in Sources */,
 				01E681621EF60AF00053EF17 /* EditView.swift in Sources */,
 				01764EC91EFAD2480087E13E /* TabBarScene.swift in Sources */,
@@ -780,6 +849,10 @@
 				01E6815E1EF60A690053EF17 /* PersonMessageView.swift in Sources */,
 				01E6816D1EF621820053EF17 /* UserMessage.swift in Sources */,
 				01E6817B1EF6CE380053EF17 /* VerityIdCardView.swift in Sources */,
+				0154BB3A1F11423F0046EF1F /* WillFinishOrder.swift in Sources */,
+				0154BB2E1F10C55B0046EF1F /* AddReceiveAddressView.swift in Sources */,
+				0154BB161F1086170046EF1F /* AddReceivePersonView.swift in Sources */,
+				0154BB7A1F13420D0046EF1F /* ScanLineAnimation.swift in Sources */,
 				01E681441EF58CD80053EF17 /* SendItemsView.swift in Sources */,
 				01E681641EF60B350053EF17 /* TableCell.swift in Sources */,
 				01E6814E1EF58FA40053EF17 /* FirstNavigationView.swift in Sources */,
@@ -957,6 +1030,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 22XWZV7Y89;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "农村速递/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -973,6 +1050,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 22XWZV7Y89;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "农村速递/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

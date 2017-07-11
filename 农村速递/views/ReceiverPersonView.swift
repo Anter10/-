@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class ReceiverPersonView: BaseTableViewController {
 
@@ -19,13 +21,35 @@ class ReceiverPersonView: BaseTableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
-    @objc func addPersonDatas(sender: UIBarButtonItem) {
-        UserData.getUD().addPerson(name: "郭有超", phone1: "15010215839", phone2: "")
-        self.tableView.reloadData()
-        
+        getPerson()
     }
     
+    func getPerson(){
+        var para = Parameters()
+        para["mainid"] = UserData.getUD().personmsg.phone
+        para["tbid"]   = "105"
+        Http.Post(url: Http.sendalldataaction, data: para, call: callback)
+    }
+    
+    func callback(data: JSON)-> Bool{
+        UserData.getUD().clearReceivePerson()
+        for (_,subJson):(String, JSON) in JSON(parseJSON:data.rawString()!) {
+            UserData.getUD().addPerson(name: subJson["name"].stringValue, phone1: subJson["phone1"].stringValue, phone2: subJson["phone2"].stringValue, id: subJson["id"].stringValue, mainid: subJson["uid"].stringValue)
+        }
+        self.tableView.reloadData()
+        return true
+    }
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 10
+    }
+    @objc func addPersonDatas(sender: UIBarButtonItem) {
+//        UserData.getUD().addPerson(name: "郭有超", phone1: "15010215839", phone2: "")
+//        self.tableView.reloadData()
+        self.navigationController?.pushViewController(AddReceivePersonView(), animated: true)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.tableView.reloadData()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -35,19 +59,37 @@ class ReceiverPersonView: BaseTableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return UserData.getUD().linkperson.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return UserData.getUD().linkperson.count
+        return 1
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    func deletecallback(data: JSON)-> Bool{
+        print("datadatadatadata = ",data)
+        //        UserData.getUD().receiveaddress.removeIndex(index: indexPath.row)
+        //        self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+        //
+        getPerson()
+        return true
+    }
+    
+    
     
     func deleteRow(action: UITableViewRowAction, indexPath: IndexPath) -> Void{
         print("删除按钮",indexPath.section, indexPath.row)
-        UserData.getUD().linkperson.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+       
+        var para = Parameters()
+        para["mainid"] = UserData.getUD().personmsg.phone
+        para["tbid"]   = "105"
+        para["id"]     = UserData.getUD().linkperson[indexPath.section].id
         
+        Http.Post(url: Http.deleteactionaction, data: para, call: deletecallback)
     }
     
     func editRow(action: UITableViewRowAction, indexPath: IndexPath) -> Void{
@@ -57,7 +99,7 @@ class ReceiverPersonView: BaseTableViewController {
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteRowAction:UITableViewRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "删除", handler: deleteRow)
-        deleteRowAction.backgroundColor = UIColor.darkGray
+        deleteRowAction.backgroundColor = UIColor.red
         let editRowAction:UITableViewRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "编辑", handler: editRow)
         editRowAction.backgroundColor = UIColor.gray
         return [deleteRowAction, editRowAction];
@@ -65,17 +107,14 @@ class ReceiverPersonView: BaseTableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.value2, reuseIdentifier: "Cell")
+        let cell = ReceivePersonCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
+        
         cell.selectionStyle = UITableViewCellSelectionStyle.none
-        cell.textLabel?.text = UserData.getUD().linkperson[indexPath.row].name
-        cell.textLabel?.textAlignment = NSTextAlignment.left
-        cell.textLabel?.font = UIFont(name: "Arial", size: 18)
+        cell.name = UserData.getUD().linkperson[indexPath.section].name
+        cell.phone1 = UserData.getUD().linkperson[indexPath.section].phone1
+        cell.phone2 = UserData.getUD().linkperson[indexPath.section].phone2
+        cell.flushShowMsg()
         
-        let detailLabel = UILabel(frame:  CGRect(x: -10, y: 10, width: UIScreen.main.bounds.width, height: cell.bounds.height))
-        
-        detailLabel.textAlignment = NSTextAlignment.right
-        detailLabel.text  = UserData.getUD().linkperson[indexPath.row].phone1
-        cell.addSubview(detailLabel)
         return cell
     }
  
