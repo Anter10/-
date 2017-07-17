@@ -30,7 +30,7 @@ class UserData: NSObject {
     public static var placeholders:[String] = []
     public static var loginshows: Array<String>  = []
     public static var ordershows:    Array<String>  = []
-    public static var ordershowids: [[Int]] = []
+    public static var ordershowids: [Int] = []
     public static var addreceiveshows : Array<String>  = []
     public static var addreceiveshowids : [Int]  = []
     public static var addreceiveaddressshows : Array<String>  = []
@@ -87,9 +87,9 @@ class UserData: NSObject {
         linkperson.append(person)
     }
     
-    public func addOrder(id: Int, rcname: String, mid:String) {
+    public func addOrder(id: String, rcname: String, mid:String) {
         let orderdata = OrderData()
-        orderdata.orderid = id
+        orderdata.id = id
         orderdatas.append(orderdata)
     }
     

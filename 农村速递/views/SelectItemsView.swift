@@ -17,6 +17,7 @@ class SelectItemsView: BaseTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "订单详情"
         let body = "?orderid=\(orderid)&selectpid=\(orderproid)"
         let aboutUrl = NSURL(string: Http.selectorderaction + body)!
         

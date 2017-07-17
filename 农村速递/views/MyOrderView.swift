@@ -50,6 +50,27 @@ class MyOrderView: BaseTableViewController {
         
     }
     
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let showview = ShowAllOrderDetailView()
+        var showtype = 0
+        
+        if tableView.cellForRow(at: indexPath)?.tag == 101{
+           showtype = 0
+        }else if tableView.cellForRow(at: indexPath)?.tag == 102{
+           showtype = 1
+        }else if tableView.cellForRow(at: indexPath)?.tag == 103{
+           showtype = 2
+        }
+//        self.navigationItem.backBarButtonItem  =  UIBarButtonItem(title: String(UserData.ordershows[indexPath.row]), style: UIBarButtonItemStyle.plain, target: self, action: nil)
+        showview.ordertype = showtype
+        showview.title     = String(UserData.ordershows[indexPath.row])
+        showview.backinfo  = String(UserData.ordershows[indexPath.row])
+        self.navigationController?.pushViewController(showview, animated: true)
+    }
+    
+    
+    
 //    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
 //        let deleteRowAction:UITableViewRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "删除", handler: deleteRow)
 //        deleteRowAction.backgroundColor = UIColor.darkGray
@@ -64,7 +85,8 @@ class MyOrderView: BaseTableViewController {
         cell.textLabel?.text = String(UserData.ordershows[indexPath.row])
         cell.textLabel?.textAlignment = NSTextAlignment.left
         cell.textLabel?.font = UIFont(name: "Arial", size: 18)
-        
+        cell.tag = UserData.ordershowids[indexPath.row]
+        print("orderid = ",UserData.ordershowids[indexPath.row])
 //        let detailLabel = UILabel(frame:  CGRect(x: -10, y: 10, width: UIScreen.main.bounds.width, height: cell.bounds.height))
 //
 //        detailLabel.textAlignment = NSTextAlignment.right

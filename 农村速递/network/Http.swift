@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 class Http  {
     // 请求地址
-    static let postip : String = "http://192.168.43.68:8083/hskj-express/"
+    static let postip : String = "http://192.168.3.23:8083/hskj-express/"
     
     // 发送Http请求
     static func Post(url: String, data: Parameters, call:@escaping (JSON)->Bool){
@@ -54,5 +54,6 @@ class Http  {
     static let senditemrequestaction : String = Http.postip + "senditemrequestaction"
     //    查询快递信息
     static let selectorderaction : String = Http.postip + "selectorderaction"
-    
+    //    获得某种类型的订单
+    static let selecttypeorderaction : String = Http.postip + "selecttypeorderaction"
 }

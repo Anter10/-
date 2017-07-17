@@ -80,7 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserData.loginshows = UserData.converJSONTOStringArray(jsonData: loginshowtexts["applan"+UserData.lantype])
         // 订单
         UserData.ordershows = UserData.converJSONTOStringArray(jsonData: data[8]["applan"+UserData.lantype])
-        UserData.ordershowids = UserData.converJSONTOIntArray(jsonData: data[8]["applan"+UserData.lantype])
+        UserData.ordershowids = UserData.converJSONTOIntArray(jsonData: data[8]["appids"])
         print("ordershows = ", data[8])
         // 添加联系人
         UserData.addreceiveshows = UserData.converJSONTOStringArray(jsonData: data[9]["applan"+UserData.lantype])
