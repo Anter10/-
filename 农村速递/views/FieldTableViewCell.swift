@@ -19,8 +19,9 @@ class FieldTableViewCell: UITableViewCell {
     }
     
     func flushShow(){
-        textfield = UITextField(frame: CGRect(x: 120, y: 10, width: self.frame.width - 120, height: self.frame.height))
+        textfield = UITextField(frame: CGRect(x: 120, y: 10, width: Paramters.ScreenSize.width - 120, height: self.frame.height))
         print("sdsdsdsdd")
+  
         self.addSubview(textfield)
         textfield.placeholder = placeholder
     }

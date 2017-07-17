@@ -29,6 +29,7 @@ class AddReceiveAddressView: BaseTableViewController {
             let data = ReceiveAddressData(id: subJson["id"].stringValue, mailid: subJson["mailid"].stringValue, mainid: subJson["mainid"].stringValue, province: subJson["province"].stringValue, city: subJson["city"].stringValue, controy: subJson["controy"].stringValue, detail: subJson["detail"].stringValue, addtime: subJson["addtime"].stringValue)
             UserData.getUD().receiveaddress.addAddress(address: data)
         }
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:UserData.appshowtexts[16], style: UIBarButtonItemStyle.plain, target: self, action: nil)
         self.navigationController?.popViewController(animated: true)
         return true
     }

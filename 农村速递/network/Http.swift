@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 class Http  {
     // 请求地址
-    static let postip : String = "http://192.168.3.23:8083/hskj-express/"
+    static let postip : String = "http://192.168.43.68:8083/hskj-express/"
     
     // 发送Http请求
     static func Post(url: String, data: Parameters, call:@escaping (JSON)->Bool){
@@ -24,27 +24,35 @@ class Http  {
         }
     }
     
+    
+    
     //    请求文本显示
-    static let getshows: String  = Http.postip + "getappshow"
+    static let getshows: String               = Http.postip + "getappshow"
     //    请求登陆
-    static let loginurl: String  =  Http.postip + "loginbypwd"
+    static let loginurl: String               =  Http.postip + "loginbypwd"
     //    修改用户信息
-    static let changemsg: String =  Http.postip + "changepersonmessage"
+    static let changemsg: String              =  Http.postip             + "changepersonmessage"
     //    注册的时候发送验证码
-    static let sendregistercode : String = Http.postip + "getcode"
+    static let sendregistercode : String      = Http.postip      + "getcode"
     //    验证发送的验证码是否正确
     static let verilphoneoreamilcode : String = Http.postip + "vailphoneoremailcode"
     //    修改密码
-    static let changepassword : String = Http.postip + "changepassword"
+    static let changepassword : String        = Http.postip        + "changepassword"
     //    添加联系人
-    static let addreceiveperson : String = Http.postip + "addreceiveperson"
+    static let addreceiveperson : String      = Http.postip      + "addreceiveperson"
     //    添加收件地址
-    static let addreceiveaddress : String = Http.postip + "addreceiveaddress"
+    static let addreceiveaddress : String     = Http.postip     + "addreceiveaddress"
     //    发送数据请求
-    static let sendalldataaction : String = Http.postip + "sendalldataaction"
+    static let sendalldataaction : String     = Http.postip     + "sendalldataaction"
     //    删除数据请求
-    static let deleteactionaction : String = Http.postip + "deleteactionaction"
-    
-    
+    static let deleteactionaction : String    = Http.postip    + "deleteactionaction"
+    //    关于农村速递
+    static let aboutncsd : String             = Http.postip    + "aboutncsd"
+    //    验证身份证
+    static let veriidcard : String            = Http.postip   + "veriidcard"
+    //    提交快递请求信息
+    static let senditemrequestaction : String = Http.postip + "senditemrequestaction"
+    //    查询快递信息
+    static let selectorderaction : String = Http.postip + "selectorderaction"
     
 }

@@ -16,4 +16,7 @@ class ReceivePerson {
     init() {
         
     }
+    func getString() -> String {
+        return name+" " + phone1
+    }
 }

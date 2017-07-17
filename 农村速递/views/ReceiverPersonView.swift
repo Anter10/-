@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 class ReceiverPersonView: BaseTableViewController {
-
+    var upperview: SendItemsView?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,7 +45,9 @@ class ReceiverPersonView: BaseTableViewController {
     @objc func addPersonDatas(sender: UIBarButtonItem) {
 //        UserData.getUD().addPerson(name: "郭有超", phone1: "15010215839", phone2: "")
 //        self.tableView.reloadData()
-        self.navigationController?.pushViewController(AddReceivePersonView(), animated: true)
+        let rv = AddReceivePersonView()
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:UserData.appshowtexts[15], style: UIBarButtonItemStyle.plain, target: self, action: nil)
+        self.navigationController?.pushViewController(rv, animated: true)
     }
     override func viewWillAppear(_ animated: Bool) {
         self.tableView.reloadData()
@@ -110,7 +112,7 @@ class ReceiverPersonView: BaseTableViewController {
         let cell = ReceivePersonCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
         
         cell.selectionStyle = UITableViewCellSelectionStyle.none
-        cell.name = UserData.getUD().linkperson[indexPath.section].name
+        cell.name   = UserData.getUD().linkperson[indexPath.section].name
         cell.phone1 = UserData.getUD().linkperson[indexPath.section].phone1
         cell.phone2 = UserData.getUD().linkperson[indexPath.section].phone2
         cell.flushShowMsg()
@@ -118,7 +120,14 @@ class ReceiverPersonView: BaseTableViewController {
         return cell
     }
  
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("当前选择的下表 = ",indexPath.row)
+        if (upperview != nil) {
+           upperview?.rpi = UserData.getUD().linkperson[indexPath.section].id
+           self.navigationController?.popViewController(animated: true)
+        }
+       
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

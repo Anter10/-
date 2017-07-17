@@ -29,7 +29,13 @@ class ReceiveAddressData{
         self.addtime = addtime
     }
     
+    init(){
+        
+    }
+    
     func toString()-> String{
         return province + city + controy + detail
     }
+    
+    
 }

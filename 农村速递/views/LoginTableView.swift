@@ -55,6 +55,19 @@ class LoginTableView: BaseTableViewController , UIGestureRecognizerDelegate, UIT
             per["id"]         = uid
             per["logintype"]  = "101"
             per["pwd"]        = upwd
+           
+            if upwd.characters.count > 0 {
+               pwdfield.text = upwd
+            }else{
+                pwdfield.placeholder = "请输入密码"
+            }
+            if uid.characters.count > 0 {
+               idfield.text  = uid
+            }else{
+               idfield.placeholder = "请输入账号"
+            }
+            
+            
             Http.Post(url: Http.loginurl, data: per, call: logincallback)
         }
         print("什么情况是事实",dir)
@@ -110,7 +123,7 @@ class LoginTableView: BaseTableViewController , UIGestureRecognizerDelegate, UIT
             UserData.getUD().personmsg.sex = data[0]["usex"].stringValue
             UserData.getUD().personmsg.flushMSG()
             self.navigationController?.setNavigationBarHidden(true, animated: true)
-            self.navigationController?.pushViewController(TabBarScene(), animated: true)
+            self.navigationController?.pushViewController(UserData.tabscene, animated: true)
             
             var persondir:NSDictionary = ["id":String(data[0]["uphone"].stringValue),"pwd" : String( data[0]["upassword"].stringValue) ]
             
@@ -185,11 +198,9 @@ class LoginTableView: BaseTableViewController , UIGestureRecognizerDelegate, UIT
                     }else{
                        cell.textLabel?.text = "账号"
                     }
-                    idfield.becomeFirstResponder()
-                    idfield = UITextField(frame: CGRect(x: 75, y: 10, width: 220, height: 40))
-                    idfield.placeholder = "请输入账号"
+                    
+                    idfield.frame = CGRect(x: 75, y: 10, width: 220, height: 40)
                     idfield.delegate = self
-                    idfield.text = uid
                     print("uid = ",uid)
                     cell.addSubview(idfield)
                 }else{
@@ -198,11 +209,9 @@ class LoginTableView: BaseTableViewController , UIGestureRecognizerDelegate, UIT
                     }else{
                         cell.textLabel?.text = "密码"
                     }
-                    pwdfield = UITextField(frame: CGRect(x: 75, y: 10, width: 220, height: 40))
+                    pwdfield.frame = CGRect(x: 75, y: 10, width: 220, height: 40)
                     pwdfield.delegate = self
-                    pwdfield.placeholder = "请输入密码"
                     pwdfield.isSecureTextEntry = true
-                    idfield.text = upwd
                     print("upwd = ",upwd)
                     cell.addSubview(pwdfield)
                 }

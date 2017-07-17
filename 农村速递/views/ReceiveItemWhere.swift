@@ -11,9 +11,13 @@ import Alamofire
 import SwiftyJSON
 
 class ReceiveItemWhere: BaseTableViewController {
-
+    var upperview: SendItemsView?
+    var dealtag  : Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         self.navigationItem.rightBarButtonItem =  UIBarButtonItem(title: UserData.appshowtexts[5], style: UIBarButtonItemStyle.done, target: self, action:#selector(addReceiveDatas))
         
         // Uncomment the following line to preserve selection between presentations
@@ -122,6 +126,20 @@ class ReceiveItemWhere: BaseTableViewController {
     
     override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "删除"
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if (upperview != nil) {
+            if dealtag == UserData.senditemshowids[1]{
+               upperview?.rpwi = UserData.getUD().receiveaddress.addresss[indexPath.row].id
+            }else if dealtag == UserData.senditemshowids[2]{
+               upperview?.spwi = UserData.getUD().receiveaddress.addresss[indexPath.row].id
+            }
+            
+            self.navigationController?.popViewController(animated: true)
+        }
+        print("当前选择的下表1 = ",indexPath.row)
     }
 
     /*

@@ -111,18 +111,21 @@ class FirstTableViewController: BaseTableViewController, UISearchBarDelegate,UIG
         showViews()
         self.view.removeGestureRecognizer(tap)
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: UserData.appshowtexts[0], style: UIBarButtonItemStyle.plain, target: self, action: nil)
-        let searchresult = SearchResultView()
+        let searchresult = SelectItemsView()
+        searchresult.orderid = searchBar.text!
+        print("查询订单 = ,",searchBar.text!)
         searchresult.title = UserData.appshowtexts[3]
         self.navigationController?.pushViewController(searchresult, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell: UITableViewCell? = tableView.cellForRow(at: indexPath)
-        var showview : BaseTableViewController = BaseTableViewController()
+        var showview : UIViewController = UIViewController()
         if(cell!.tag == 101){
             showview = SwapCodeView()
         }else if(cell?.tag == 102){
             showview = SendItemsView()
+            
         }else if(cell?.tag == 103){
             showview = NearExpressWheresView()
         }

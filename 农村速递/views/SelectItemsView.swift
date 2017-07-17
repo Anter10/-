@@ -8,16 +8,35 @@
 
 import UIKit
 
-class SelectItemsView: UITableViewController {
+class SelectItemsView: BaseTableViewController {
 
+    var aboutWebView = UIWebView()
+    ;
+    var orderid      = ""
+    var orderproid   = "-1"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let body = "?orderid=\(orderid)&selectpid=\(orderproid)"
+        let aboutUrl = NSURL(string: Http.selectorderaction + body)!
+        
+        //编码POST数据
+        let postData = body.data(using: String.Encoding.utf8, allowLossyConversion: true)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        self.tableView.isScrollEnabled = false
+        let urlLabel = UILabel(frame: CGRect(x: 0, y: 20, width: Paramters.ScreenSize.width, height: 40))
+        urlLabel.textAlignment = NSTextAlignment.center
+        urlLabel.text = "www.express-heisekeji.net"
+        //        self.view.addSubview(urlLabel)
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        aboutWebView = UIWebView(frame: CGRect(x: 0, y: 2, width: Paramters.ScreenSize.width, height: Paramters.ScreenSize.height - 110))
+        let request = NSURLRequest(url: aboutUrl as URL)
+ 
+        aboutWebView.loadRequest(request as URLRequest)
+        
+        self.tableView.addSubview(aboutWebView)
     }
 
     override func didReceiveMemoryWarning() {

@@ -61,15 +61,18 @@ class EditView: BaseTableViewController {
         var showview:BaseTableViewController? = nil
         
         if (indexPath.section == 0 && indexPath.row == 0){
-            
+           
         }
         if UserData.getUD().editdata.editids[indexPath.section][indexPath.row] == 103{
 //           showview = LoginTableView()
 //           self.navigationController?.setNavigationBarHidden(true, animated:false)
-            exit(0)
+//            exit(0)
+            MoreCall()
 //            self.navigationController?.popToRootViewController(animated: true)
         }else if UserData.getUD().editdata.editids[indexPath.section][indexPath.row] == 101{
            showview = VerityIdCardView()
+        }else if UserData.getUD().editdata.editids[indexPath.section][indexPath.row] == 104{
+            showview = AboutNCSDExpressLayer()
         }
         if showview != nil{
            showview?.title = UserData.getUD().editdata.edits[indexPath.section][indexPath.row]
@@ -78,7 +81,34 @@ class EditView: BaseTableViewController {
         }
         
     }
-    
+ 
+    // 点击更多的时候调用
+    func MoreCall(){
+        
+        let alert = UIAlertController(title: "", message: "退出账号后,将保存你的账号,密码不保存,确定退出吗？", preferredStyle: UIAlertControllerStyle.actionSheet)
+        let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel){
+            (result : UIAlertAction) -> Void in
+            print("Cancel")
+        }
+        
+        let okAction = UIAlertAction(title: "退出账号", style: UIAlertActionStyle.default){
+            (result : UIAlertAction) -> Void in
+            // 注册账号
+            let persondir:NSDictionary = ["id":UserData.getUD().personmsg.phone,"pwd" : ""]
+            
+            // 保存账号数据
+            UserData.writeDataToPath(data: persondir, filename: "usermessage.json")
+            UserData.tabscene.removeFromParentViewController()
+            exit(0)
+        }
+        
+        
+        
+        alert.addAction(cancelAction)
+ 
+        alert.addAction(okAction)
+        self.present(alert, animated: true)
+    }
     
     
     /*

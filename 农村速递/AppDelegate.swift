@@ -91,7 +91,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        //  寄件类型
         UserData.senditemshows = UserData.converJSONTOStringArray(jsonData: data[11]["applan"+UserData.lantype])
         UserData.senditemshowids = UserData.converJSONTOIntArray(jsonData: data[11]["appids"])
-        
+        // 关于
+        UserData.aboutText = data[12]["applan"+UserData.lantype].stringValue
+         
         return true
     }
     
@@ -104,10 +106,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        print("退出应用了1")
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        print("进入应用了")
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {

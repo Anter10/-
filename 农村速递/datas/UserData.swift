@@ -18,6 +18,8 @@ class UserData: NSObject {
     var orderdatas    : [OrderData]     = []
     var verificationshows : [String]    = []
     static var appshowtexts : [String]    = []
+    static var veriidcarddata = ViriIdCard()
+    static var tabscene = TabBarScene()
     var credit    : Int         = 0
     public static var lantype  : String = "1"
     
@@ -36,6 +38,7 @@ class UserData: NSObject {
     
     public static var senditemshows: Array<String> = []
     public static var senditemshowids: [Int] = []
+    public static var aboutText = ""
     
     static func getUD()->UserData{
         return ud
@@ -53,7 +56,25 @@ class UserData: NSObject {
         linkperson = []
     }
     
-   
+    // 得到联系人
+    func getLinkPersonById(id: String) -> ReceivePerson {
+        for person in linkperson {
+            if person.id == id {
+               return person
+            }
+        }
+        return ReceivePerson()
+    }
+    
+    // 得到地址
+    func getAddressById(id: String) -> ReceiveAddressData {
+        for address in receiveaddress.addresss {
+            if address.id == id {
+                return address
+            }
+        }
+        return ReceiveAddressData()
+    }
     
     //  添加收货人
     public func addPerson(name: String, phone1: String, phone2:String, id: String ,mainid: String ) {
@@ -142,5 +163,6 @@ class UserData: NSObject {
         }
         return data
     }
+    
     
 }
