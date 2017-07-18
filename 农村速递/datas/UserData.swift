@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 class UserData: NSObject {
+   
     var personmsg : UserMessage     = UserMessage()
     var editdata  : EditData        = EditData()
     static var ud : UserData        = UserData()

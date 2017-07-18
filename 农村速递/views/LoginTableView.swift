@@ -121,6 +121,7 @@ class LoginTableView: BaseTableViewController , UIGestureRecognizerDelegate, UIT
             UserData.getUD().personmsg.name = data[0]["uname"].stringValue
             UserData.getUD().personmsg.age = data[0]["uage"].stringValue
             UserData.getUD().personmsg.sex = data[0]["usex"].stringValue
+             UserData.getUD().personmsg.usersecurecode = data[0]["securecode"].stringValue
             UserData.getUD().personmsg.flushMSG()
             self.navigationController?.setNavigationBarHidden(true, animated: true)
             self.navigationController?.pushViewController(UserData.tabscene, animated: true)

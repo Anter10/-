@@ -19,14 +19,16 @@ class UserMessage {
     var msg : [[String]] = []
     var keys: [[String]] = []
     var tags: [[Int]]    = []
+    var usersecurecode: String       = "" // 用户安全码
     
-    init(_name: String, _phone: String, _email: String, _sex: String, _age: String, _address: String){
+    init(_name: String, _phone: String, _email: String, _sex: String, _age: String, _address: String,_usersecurecode: String){
         name    = _name
         phone   = _phone
         email   = _email
         sex     = _sex
         age     = _age
         address = _address
+        usersecurecode = _usersecurecode
         msg  = [[name],[phone],[email,address],[sex,age]]
     }
     
