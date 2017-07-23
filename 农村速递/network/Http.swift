@@ -19,6 +19,8 @@ class Http  {
         print(data,"此次请求的地址 = ", url);
         if UserData.getUD().personmsg.usersecurecode.characters.count > 0 {
            data["securecode"] =  UserData.getUD().personmsg.usersecurecode
+           data["linkroleid"] =  UserData.getUD().personmsg.phone
+            
         }
         
         Alamofire.request(url, method: .post, parameters: data).response { response1 in

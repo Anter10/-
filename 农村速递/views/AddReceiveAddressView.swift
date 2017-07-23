@@ -47,7 +47,13 @@ class AddReceiveAddressView: BaseTableViewController {
         per["controy"]    = cells[2].textfield.text as! String
         per["detail"]     = cells[3].textfield.text as! String
         per["mailid"]     = cells[4].textfield.text as! String
-        Http.Post(url: Http.addreceiveaddress, data: per, call: callback)
+        if editmsg != nil{
+             per["id"] = editmsg?.id
+             Http.Post(url: Http.updatereceiveaddressaction, data: per, call: callback)
+        }else{
+             Http.Post(url: Http.addreceiveaddress, data: per, call: callback)
+        }
+       
         print(per)
     }
     

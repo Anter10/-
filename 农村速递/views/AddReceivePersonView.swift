@@ -42,6 +42,7 @@ class AddReceivePersonView: BaseTableViewController {
        per["phone1"] = cells[1].textfield.text as! String
        per["phone2"] = cells[2].textfield.text as! String
       if (editrp != nil){
+           per["id"]    = editrp?.id
             Http.Post(url: Http.updatereceivepersonaction, data: per, call: callback)
       }
       if (editrp == nil)  {
