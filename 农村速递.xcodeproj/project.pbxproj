@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		010A5F6E1F23BB7400834E1B /* LifeNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010A5F6D1F23BB7400834E1B /* LifeNavigationView.swift */; };
+		010A5F801F23BB9A00834E1B /* LifeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010A5F7F1F23BB9A00834E1B /* LifeTableView.swift */; };
+		010A5F821F23CC3D00834E1B /* LifeServerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010A5F811F23CC3D00834E1B /* LifeServerData.swift */; };
 		011056361EF82DD400712ADC /* Http.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011056351EF82DD400712ADC /* Http.swift */; };
 		01144DFF1F0293D1004CE51B /* FindPasswordTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013EB1BC1F0251EE007C6F3E /* FindPasswordTable.swift */; };
 		01144E0E1F0293EB004CE51B /* RegisterViewTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013EB1BA1F0251EE007C6F3E /* RegisterViewTable.swift */; };
@@ -247,6 +250,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		010A5F6D1F23BB7400834E1B /* LifeNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeNavigationView.swift; sourceTree = "<group>"; };
+		010A5F7F1F23BB9A00834E1B /* LifeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeTableView.swift; sourceTree = "<group>"; };
+		010A5F811F23CC3D00834E1B /* LifeServerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeServerData.swift; sourceTree = "<group>"; };
 		011056121EF828AC00712ADC /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = "../../../../Downloads/Alamofire-master/Alamofire.xcodeproj"; sourceTree = "<group>"; };
 		011056351EF82DD400712ADC /* Http.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Http.swift; sourceTree = "<group>"; };
 		011056501EF8367B00712ADC /* SwiftyJSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyJSON.xcodeproj; path = "../../../../Downloads/SwiftyJSON-master/SwiftyJSON.xcodeproj"; sourceTree = "<group>"; };
@@ -1394,6 +1400,8 @@
 				015CAE001F186D00009A88CE /* SendItemFollowLayout.swift */,
 				01618A361F19F56700C8919F /* AboutNCSDExpressLayer.swift */,
 				0166F1BC1F1BD4E500BE80EE /* ShowAllOrderDetailView.swift */,
+				010A5F6D1F23BB7400834E1B /* LifeNavigationView.swift */,
+				010A5F7F1F23BB9A00834E1B /* LifeTableView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -1413,6 +1421,7 @@
 				0154BB3B1F1142550046EF1F /* FinishOrder.swift */,
 				0154BB3D1F1142670046EF1F /* MovingOrder.swift */,
 				01618A3B1F1A5D1F00C8919F /* ViriIdCard.swift */,
+				010A5F811F23CC3D00834E1B /* LifeServerData.swift */,
 			);
 			path = datas;
 			sourceTree = "<group>";
@@ -1714,6 +1723,7 @@
 				0154BB301F10F65E0046EF1F /* AllActivitysView.swift in Sources */,
 				01764EB91EFAD07D0087E13E /* LoginTableView.swift in Sources */,
 				01E6814A1EF58F670053EF17 /* FirstTableViewController.swift in Sources */,
+				010A5F6E1F23BB7400834E1B /* LifeNavigationView.swift in Sources */,
 				01E681601EF60A800053EF17 /* MyOrderView.swift in Sources */,
 				01E681771EF647330053EF17 /* ReceiverPersonView.swift in Sources */,
 				01E681711EF62DC10053EF17 /* EditData.swift in Sources */,
@@ -1727,6 +1737,7 @@
 				01E09B8C1EF7BC36003013FF /* ChangePersonMessageView.swift in Sources */,
 				0154BB3E1F1142670046EF1F /* MovingOrder.swift in Sources */,
 				015CAABF1F17C7EF009A88CE /* SendExpressView.swift in Sources */,
+				010A5F821F23CC3D00834E1B /* LifeServerData.swift in Sources */,
 				01E681561EF5ABD10053EF17 /* SearchResultView.swift in Sources */,
 				01E681621EF60AF00053EF17 /* EditView.swift in Sources */,
 				01764EC91EFAD2480087E13E /* TabBarScene.swift in Sources */,
@@ -1740,6 +1751,7 @@
 				01E6817B1EF6CE380053EF17 /* VerityIdCardView.swift in Sources */,
 				0154BB3A1F11423F0046EF1F /* WillFinishOrder.swift in Sources */,
 				0154BB2E1F10C55B0046EF1F /* AddReceiveAddressView.swift in Sources */,
+				010A5F801F23BB9A00834E1B /* LifeTableView.swift in Sources */,
 				0154BB161F1086170046EF1F /* AddReceivePersonView.swift in Sources */,
 				0166F1BD1F1BD4E500BE80EE /* ShowAllOrderDetailView.swift in Sources */,
 				0154BB7A1F13420D0046EF1F /* ScanLineAnimation.swift in Sources */,

@@ -17,7 +17,7 @@ class ReceiveItemWhere: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+    
         self.navigationItem.rightBarButtonItem =  UIBarButtonItem(title: UserData.appshowtexts[5], style: UIBarButtonItemStyle.done, target: self, action:#selector(addReceiveDatas))
         
         // Uncomment the following line to preserve selection between presentations
@@ -95,7 +95,9 @@ class ReceiveItemWhere: BaseTableViewController {
     
     func editRow(action: UITableViewRowAction, indexPath: IndexPath) -> Void{
         print("设置按钮",indexPath.section, indexPath.row)
-        
+        let addrpv = AddReceiveAddressView()
+        addrpv.editmsg = UserData.getUD().receiveaddress.addresss[indexPath.row]
+        self.show(addrpv, sender: nil)
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {

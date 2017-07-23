@@ -17,15 +17,16 @@ class ReceiveAddressData{
     var controy:     String = ""
     var detail:      String = ""
     var addtime:     String = ""
-    
+    var editra: Array<String> = []
     init(id: String,mailid: String,mainid: String,province: String,city: String,controy: String,detail: String, addtime: String) {
         self.id = id;
-        self.mailid = mailid
+        
         self.mainid = mainid
         self.province = province
         self.city = city
         self.controy = controy
         self.detail = detail
+        self.mailid = mailid
         self.addtime = addtime
     }
     
@@ -35,6 +36,15 @@ class ReceiveAddressData{
     
     func toString()-> String{
         return province + city + controy + detail
+    }
+    
+    func getEditData() -> Array<String> {
+        editra.append(province)
+        editra.append(city)
+        editra.append(controy)
+        editra.append(detail)
+        editra.append(mailid)
+        return editra
     }
     
     

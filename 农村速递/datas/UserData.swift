@@ -41,6 +41,13 @@ class UserData: NSObject {
     public static var senditemshowids: [Int] = []
     public static var aboutText = ""
     
+    public var LifeBaseShowDics:   [[String]] = []
+    public var LifeBaseShowIds :   [[Int]] = []
+    
+    public var LifeServerDatas: [[LifeServerData]] = []
+    
+   
+    
     static func getUD()->UserData{
         return ud
     }
@@ -55,6 +62,14 @@ class UserData: NSObject {
     // 清空收获地址
     public func clearReceivePerson(){
         linkperson = []
+    }
+     
+    public func getLifeBaseData()->[[String]]{
+       return LifeBaseShowDics
+    }
+    
+    public func getLifeServerDatas()->[[LifeServerData]]{
+       return LifeServerDatas
     }
     
     // 得到联系人

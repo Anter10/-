@@ -41,7 +41,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserData.fshowdics = UserData.converJSONTOStringArray(jsonData: fsdata)
         UserData.fshowids  = UserData.converJSONTOIntArray(jsonData: fiddata)
         
-        
+        // 生活服务号信息
+        let lifedata = data[13]
+        let lfdata    = lifedata["applan"+UserData.lantype]
+        let lfiddata   = lifedata["appids"]
+        UserData.getUD().LifeBaseShowDics = UserData.converJSONTOStringArray(jsonData: lfdata)
+        UserData.getUD().LifeBaseShowIds  = UserData.converJSONTOIntArray(jsonData: lfiddata)
         // 个人中心显示数据
         let pertdata = data[0]
         let psdata    = pertdata["applan"+UserData.lantype]
@@ -84,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("ordershows = ", data[8])
         // 添加联系人
         UserData.addreceiveshows = UserData.converJSONTOStringArray(jsonData: data[9]["applan"+UserData.lantype])
-       UserData.addreceiveshowids = UserData.converJSONTOIntArray(jsonData: data[9]["appids"])
+        UserData.addreceiveshowids = UserData.converJSONTOIntArray(jsonData: data[9]["appids"])
        // 添加收件地址
         UserData.addreceiveaddressshows = UserData.converJSONTOStringArray(jsonData: data[10]["applan"+UserData.lantype])
         UserData.addreceiveaddresssshowids = UserData.converJSONTOIntArray(jsonData: data[10]["appids"])

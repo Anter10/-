@@ -11,12 +11,12 @@ import Alamofire
 import SwiftyJSON
 class Http  {
     // 请求地址
-    static let postip : String = "http://192.168.3.23:8083/hskj-express/"
+    static let postip : String = "http://192.168.43.68:8083/hskj-express/"
 //    static let postip : String = "http://express.heisekeji.net/"
     // 发送Http请求
     static func Post(url: String, data: Parameters, call:@escaping (JSON)->Bool){
         var data = data
-        print(data,"此次请求的地址 = ", UserData.getUD().personmsg.usersecurecode);
+        print(data,"此次请求的地址 = ", url);
         if UserData.getUD().personmsg.usersecurecode.characters.count > 0 {
            data["securecode"] =  UserData.getUD().personmsg.usersecurecode
         }
@@ -63,4 +63,10 @@ class Http  {
     static let selecttypeorderaction : String = Http.postip + "selecttypeorderaction"
     //    清空订单信息
     static let clearorderbyorderaction: String = Http.postip + "clearorderbyorderaction"
+    //    更新收件人的地址信息
+    static let updatereceiveaddressaction: String = Http.postip + "updatereceiveaddressaction"
+    //    更新收件人信息
+    static let updatereceivepersonaction: String  = Http.postip + "updatereceivepersonaction"
+    
+    
 }

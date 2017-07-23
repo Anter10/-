@@ -12,6 +12,7 @@ import SwiftyJSON
 
 class ReceiverPersonView: BaseTableViewController {
     var upperview: SendItemsView?
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -96,7 +97,9 @@ class ReceiverPersonView: BaseTableViewController {
     
     func editRow(action: UITableViewRowAction, indexPath: IndexPath) -> Void{
         print("设置按钮",indexPath.section, indexPath.row)
-        
+        let editperson = AddReceivePersonView()
+        editperson.editrp = UserData.getUD().linkperson[indexPath.section]
+        self.show(editperson, sender: nil)
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {

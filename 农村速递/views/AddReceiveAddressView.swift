@@ -12,9 +12,14 @@ import SwiftyJSON
 
 class AddReceiveAddressView: BaseTableViewController {
     var cells : Array<FieldTableViewCell> = []
+    var editmsg : ReceiveAddressData? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "添加收件地址"
+        if editmsg != nil{
+           self.title = "更新地址信息"
+        }
         self.navigationItem.rightBarButtonItem =  UIBarButtonItem(title: UserData.appshowtexts[4], style: UIBarButtonItemStyle.done, target: self, action:#selector(addReceiveDatas))
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -36,12 +41,12 @@ class AddReceiveAddressView: BaseTableViewController {
     @objc func addReceiveDatas(sender: UIBarButtonItem) {
         var per = Parameters()
         per["mainid"]     = UserData.getUD().personmsg.phone
-        per["mailid"]     = cells[0].textfield.text as! String
-        per["province"]   = cells[1].textfield.text as! String
-        per["city"]       = cells[2].textfield.text as! String
-        per["controy"]    = cells[3].textfield.text as! String
-        per["detail"]     = cells[4].textfield.text as! String
-        
+       
+        per["province"]   = cells[0].textfield.text as! String
+        per["city"]       = cells[1].textfield.text as! String
+        per["controy"]    = cells[2].textfield.text as! String
+        per["detail"]     = cells[3].textfield.text as! String
+        per["mailid"]     = cells[4].textfield.text as! String
         Http.Post(url: Http.addreceiveaddress, data: per, call: callback)
         print(per)
     }
@@ -68,6 +73,9 @@ class AddReceiveAddressView: BaseTableViewController {
         let cell = FieldTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
         cell.placeholder =  String(UserData.addreceiveaddressshows[indexPath.row])
         cell.flushShow()
+        if editmsg != nil{
+           cell.textfield.text = editmsg?.getEditData()[indexPath.row]
+        }
         cell.showid = UserData.addreceiveaddresssshowids[indexPath.row]
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         cell.textLabel?.text = String(UserData.addreceiveaddressshows[indexPath.row])

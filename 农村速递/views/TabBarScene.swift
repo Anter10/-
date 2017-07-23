@@ -11,6 +11,7 @@ import UIKit
 class TabBarScene: UITabBarController {
     var mc  =  FirstNavigationView()
     var hc  =  PersonNavigationView()
+    var lv  =  LifeNavigationView()
     var firstBar: UITabBarItem = UITabBarItem()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +25,12 @@ class TabBarScene: UITabBarController {
         hc.tabBarItem.image = UIImage(named: "man_64.png")
         hc.tabBarItem.selectedImage = UIImage(named: "man_64.png")
         
-        let allController = [mc,hc] as [UIViewController]
+        lv.tabBarItem.title = UserData.appshowtexts[17]
+        
+        lv.tabBarItem.image = UIImage(named: "life.png")
+        lv.tabBarItem.selectedImage = UIImage(named: "life.png")
+        
+        let allController = [mc,lv,hc] as [UIViewController]
         self.viewControllers = allController as! [UIViewController]
         
         // Do any additional setup after loading the view.
