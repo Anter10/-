@@ -115,6 +115,7 @@ class ReceiverPersonView: BaseTableViewController {
         let cell = ReceivePersonCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
         
         cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.separatorInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         cell.name   = UserData.getUD().linkperson[indexPath.section].name
         cell.phone1 = UserData.getUD().linkperson[indexPath.section].phone1
         cell.phone2 = UserData.getUD().linkperson[indexPath.section].phone2

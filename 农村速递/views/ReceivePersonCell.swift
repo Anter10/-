@@ -31,6 +31,7 @@ class ReceivePersonCell: UITableViewCell {
     
     func flushShowMsg(){
         nameLabel = UILabel(frame: CGRect(x: 10, y: 5, width: self.frame.width, height: height / 3))
+        nameLabel.font = UIFont(name: "Arial", size: 20)
         phone1Label = UILabel(frame: CGRect(x: 10, y:height / 3, width: self.frame.width , height: height / 3))
         phone2Label = UILabel(frame: CGRect(x: 10, y:height - (height / 3) , width: self.frame.width, height: (height / 3) - 10))
         self.addSubview(nameLabel)
