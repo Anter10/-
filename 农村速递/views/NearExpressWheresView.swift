@@ -23,6 +23,7 @@ class NearExpressWheresView: BaseTableViewController , CLLocationManagerDelegate
         self.view.addSubview(self.mainMapView)
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         //地图类型设置 - 标准地图
+        
         self.mainMapView.mapType = MKMapType.standard
 //        self.mainMapView.delegate = self
         //创建一个MKCoordinateSpan对象，设置地图的范围（越小越精确）

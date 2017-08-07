@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class AddReceiveAddressView: BaseTableViewController {
+class AddReceiveAddressView: BaseTableViewController , UITextViewDelegate{
     var cells : Array<FieldTableViewCell> = []
     var editmsg : ReceiveAddressData? = nil
     
@@ -21,6 +21,7 @@ class AddReceiveAddressView: BaseTableViewController {
            self.title = "更新地址信息"
         }
         self.navigationItem.rightBarButtonItem =  UIBarButtonItem(title: UserData.appshowtexts[4], style: UIBarButtonItemStyle.done, target: self, action:#selector(addReceiveDatas))
+        self.tableView.estimatedRowHeight = 120
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -45,8 +46,9 @@ class AddReceiveAddressView: BaseTableViewController {
         per["province"]   = cells[0].textfield.text as! String
         per["city"]       = cells[1].textfield.text as! String
         per["controy"]    = cells[2].textfield.text as! String
-        per["detail"]     = cells[3].textfield.text as! String
-        per["mailid"]     = cells[4].textfield.text as! String
+        per["mailid"]     = cells[3].textfield.text as! String
+        per["detail"]     = cells[4].textView.text as! String
+        print("editmsgeditmsg ",editmsg)
         if editmsg != nil{
              per["id"] = editmsg?.id
              Http.Post(url: Http.updatereceiveaddressaction, data: per, call: callback)
@@ -55,6 +57,13 @@ class AddReceiveAddressView: BaseTableViewController {
         }
        
         print(per)
+    }
+    
+    override  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath.row < UserData.addreceiveaddressshows.count - 1){
+            return 60
+        }
+        return 85
     }
     
     override func didReceiveMemoryWarning() {
@@ -74,19 +83,40 @@ class AddReceiveAddressView: BaseTableViewController {
         return UserData.addreceiveaddressshows.count
     }
     
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        
+        textView.text = ""
+        return true
+    }
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = FieldTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
-        cell.placeholder =  String(UserData.addreceiveaddressshows[indexPath.row])
-        cell.flushShow()
-        if editmsg != nil{
-           cell.textfield.text = editmsg?.getEditData()[indexPath.row]
+       
+        if indexPath.row < UserData.addreceiveaddressshows.count - 1{
+           cell.placeholder =  String(UserData.addreceiveaddressshows[indexPath.row])
+           cell.flushShow()
+           if editmsg != nil{
+              cell.textfield.text = editmsg?.getEditData()[indexPath.row]
+           }
+        }else{
+           cell.addTextView()
+           cell.textView.delegate = self
+           
+           if editmsg != nil{
+              cell.textView.text = editmsg?.getEditData()[indexPath.row]
+           }else{
+              cell.textView.text = String(UserData.addreceiveaddressshows[indexPath.row])
+            }
         }
+    
         cell.showid = UserData.addreceiveaddresssshowids[indexPath.row]
+        print("")
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         cell.textLabel?.text = String(UserData.addreceiveaddressshows[indexPath.row])
         cell.textLabel?.textAlignment = NSTextAlignment.left
         cell.textLabel?.font = UIFont(name: "Arial", size: 18)
+     
         cells.append(cell)
         return cell
     }

@@ -10,8 +10,10 @@ import UIKit
 
 class FieldTableViewCell: UITableViewCell {
     var textfield = UITextField()
+    var textView  = UITextView()
     var placeholder: String = ""
     var showid        : Int    = 0
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -25,6 +27,14 @@ class FieldTableViewCell: UITableViewCell {
         self.addSubview(textfield)
         textfield.placeholder = placeholder
     }
+    
+    func addTextView(){
+        textView = UITextView(frame: CGRect(x: 120, y: 2.5, width: Paramters.ScreenSize.width - 120, height: 80))
+        print("sdsdsdsdd")
+        textView.font = UIFont(name: "Arial", size: 18)
+        self.addSubview(textView)
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         

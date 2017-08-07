@@ -19,7 +19,8 @@ class ReceiveItemWhere: BaseTableViewController {
         
     
         self.navigationItem.rightBarButtonItem =  UIBarButtonItem(title: UserData.appshowtexts[5], style: UIBarButtonItemStyle.done, target: self, action:#selector(addReceiveDatas))
-        
+        self.tableView.estimatedRowHeight = 120
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -63,13 +64,13 @@ class ReceiveItemWhere: BaseTableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return UserData.getUD().receiveaddress.addresss.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         print("地址数量= ",UserData.getUD().receiveaddress.addresss.count)
-        return UserData.getUD().receiveaddress.addresss.count
+        return 1
     }
     
     func deletecallback(data: JSON)-> Bool{
@@ -79,6 +80,10 @@ class ReceiveItemWhere: BaseTableViewController {
 //
         getallData()
         return true
+    }
+    
+    override  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
     
     
@@ -96,7 +101,7 @@ class ReceiveItemWhere: BaseTableViewController {
     func editRow(action: UITableViewRowAction, indexPath: IndexPath) -> Void{
         print("设置按钮",indexPath.section, indexPath.row)
         let addrpv = AddReceiveAddressView()
-        addrpv.editmsg = UserData.getUD().receiveaddress.addresss[indexPath.row]
+        addrpv.editmsg = UserData.getUD().receiveaddress.addresss[indexPath.section]
         self.show(addrpv, sender: nil)
     }
     
@@ -112,10 +117,11 @@ class ReceiveItemWhere: BaseTableViewController {
         let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "Cell")
         
         cell.selectionStyle = UITableViewCellSelectionStyle.none
+         cell.textLabel?.numberOfLines = 0
         if indexPath.row == UserData.getUD().receiveaddress.addresss.count{
-            
+       
         }else{
-           cell.textLabel?.text = UserData.getUD().receiveaddress.addresss[indexPath.row].toString()
+           cell.textLabel?.text = UserData.getUD().receiveaddress.addresss[indexPath.section].toString()
         }
         return cell
     }
@@ -134,9 +140,9 @@ class ReceiveItemWhere: BaseTableViewController {
         
         if (upperview != nil) {
             if dealtag == UserData.senditemshowids[1]{
-               upperview?.rpwi = UserData.getUD().receiveaddress.addresss[indexPath.row].id
+               upperview?.rpwi = UserData.getUD().receiveaddress.addresss[indexPath.section].id
             }else if dealtag == UserData.senditemshowids[2]{
-               upperview?.spwi = UserData.getUD().receiveaddress.addresss[indexPath.row].id
+               upperview?.spwi = UserData.getUD().receiveaddress.addresss[indexPath.section].id
             }
             
             self.navigationController?.popViewController(animated: true)

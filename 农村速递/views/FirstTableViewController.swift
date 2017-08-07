@@ -23,6 +23,7 @@ class FirstTableViewController: BaseTableViewController, UISearchBarDelegate,UIG
         searchBar.barTintColor = UIColor.white
         searchBar.keyboardType = UIKeyboardType.numberPad
         searchBar.placeholder = UserData.placeholders[0]
+        self.tableView.bounces = true
 //        searchBar.backgroundImage = UIImage()
         searchBar.showsCancelButton = true
         searchBar.setShowsCancelButton(true, animated: true)
@@ -67,11 +68,11 @@ class FirstTableViewController: BaseTableViewController, UISearchBarDelegate,UIG
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return showdics[section].count
+        return 0
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        print("什么情况是事实3333333")
+        
         return 10
     }
     
@@ -83,28 +84,24 @@ class FirstTableViewController: BaseTableViewController, UISearchBarDelegate,UIG
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "Cell")
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
-        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
-        cell.tag = showids[indexPath.section][indexPath.row]
-        cell.textLabel?.text = showdics[indexPath.section][indexPath.row]
+       
         return cell
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        showdics = []
-        showids  = []
         self.tableView.reloadData()
+        self.tableView.scrollsToTop = true
+        self.tableView.isScrollEnabled = false
         self.view.addGestureRecognizer(tap)
         
     }
     func showViews(){
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         searchBar.resignFirstResponder()
-        showdics = UserData.fshowdics
-        showids  = UserData.fshowids
-        self.tableView.scrollsToTop = true
         self.tableView.reloadData()
+        self.tableView.isScrollEnabled = true
+        self.tableView.scrollsToTop = true
         self.view.removeGestureRecognizer(tap)
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -119,22 +116,25 @@ class FirstTableViewController: BaseTableViewController, UISearchBarDelegate,UIG
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell: UITableViewCell? = tableView.cellForRow(at: indexPath)
-        var showview : UIViewController = UIViewController()
-        if(cell!.tag == 101){
-            showview = SwapCodeView()
-        }else if(cell?.tag == 102){
-            showview = SendItemsView()
-            
-        }else if(cell?.tag == 103){
-            showview = NearExpressWheresView()
-        }
-        print("ddddsadasd")
-        showview.title = showdics[indexPath.section][indexPath.row]
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: UserData.appshowtexts[0], style: UIBarButtonItemStyle.plain, target: self, action: nil)
-        self.navigationController?.pushViewController(showview, animated: true)
+//        let cell: UITableViewCell? = tableView.cellForRow(at: indexPath)
+//        var showview : UIViewController = UIViewController()
+//        if(cell!.tag == 101){
+//            showview = SwapCodeView()
+//        }else if(cell?.tag == 102){
+//            showview = SendItemsView()
+//
+//        }else if(cell?.tag == 103){
+//            showview = NearExpressWheresView()
+//        }
+//        print("ddddsadasd")
+//        showview.title = showdics[indexPath.section][indexPath.row]
+//        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: UserData.appshowtexts[0], style: UIBarButtonItemStyle.plain, target: self, action: nil)
+//        self.navigationController?.pushViewController(showview, animated: true)
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+       self.tableView.reloadData()
+       self.tableView.scrollsToTop = true
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

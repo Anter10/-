@@ -42,8 +42,8 @@ class ReceiveAddressData{
         editra.append(province)
         editra.append(city)
         editra.append(controy)
-        editra.append(detail)
         editra.append(mailid)
+        editra.append(detail)
         return editra
     }
     

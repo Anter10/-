@@ -30,30 +30,36 @@ class LifeTableView: BaseTableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 2
+        return UserData.getUD().LifeBaseShowIds.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if section == 0{
-           return UserData.getUD().LifeBaseShowIds.count
-        }
-        return UserData.getUD().LifeServerDatas.count
+        return UserData.getUD().LifeBaseShowIds[section].count
     }
-
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section < UserData.getUD().LifeBaseShowIds[section].count{
+            return 10
+        }
+        return 0
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        
-        if indexPath.section == 0{
-            
-           cell.textLabel?.text =  UserData.getUD().LifeBaseShowDics[indexPath.section][indexPath.row]
-        }
+        cell.textLabel?.text =  UserData.getUD().LifeBaseShowDics[indexPath.section][indexPath.row]
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         // Configure the cell...
-
+        cell.tag = UserData.getUD().LifeBaseShowIds[indexPath.section][indexPath.row]
         return cell
     }
- 
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if(tableView.cellForRow(at: indexPath)?.tag == 103){
+           self.navigationController?.pushViewController(ExpressServerView(), animated: true)
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.

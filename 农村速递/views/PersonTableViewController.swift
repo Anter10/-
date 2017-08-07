@@ -87,6 +87,7 @@ class PersonTableViewController: BaseTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "Cell")
         cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         // Configure the cell...
         let showid : Int     = UserData.showids[indexPath.section][indexPath.row]
         cell.textLabel?.text = UserData.showdics[indexPath.section][indexPath.row]
