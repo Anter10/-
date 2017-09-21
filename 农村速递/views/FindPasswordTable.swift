@@ -8,24 +8,45 @@
 
 import UIKit
 import DeviceCheck
+import Alamofire
+import SwiftyJSON
+
 class FindPasswordTable: UITableViewController, UITextFieldDelegate {
     
         var RegisterPhone : UITextField?
-        var InputCodeNumber: UITextField?
         var SendButton : UIButton?
-        var LoginButton : UIButton?
+    
         override func viewDidLoad() {
             super.viewDidLoad()
+            self.title = "找回密码"
             self.tableView.tableFooterView = UIView()
             //        self.tableView.bounces = false
             self.tableView.backgroundColor = UIColor.groupTableViewBackground
+            self.tableView.isScrollEnabled = false
             // Uncomment the following line to preserve selection between presentations
             // self.clearsSelectionOnViewWillAppear = false
             
             // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
             // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         }
-        
+    
+        func sendCodeCall(data: JSON) -> Bool {
+            let veride = VerCodeView()
+            veride.setTitle(title: "验证码验证")
+            self.navigationController?.pushViewController(veride, animated: true)
+            return true
+        }
+    
+        // 发送找回密码
+    @objc func findPWD(_ sender: UIButton)-> Void{
+            let phone = RegisterPhone?.text as! String
+            var par = Parameters()
+            par["phoneoreamil"] = phone
+            par["codetype"] = 104
+            UserData.cur_login_id = phone
+            Http.Post(url: Http.sendregistercode, data: par, call: sendCodeCall)
+        }
+    
         override func didReceiveMemoryWarning() {
             super.didReceiveMemoryWarning()
             // Dispose of any resources that can be recreated.
@@ -35,7 +56,7 @@ class FindPasswordTable: UITableViewController, UITextFieldDelegate {
         
         override func numberOfSections(in tableView: UITableView) -> Int {
             // #warning Incomplete implementation, return the number of sections
-            return 3
+            return 2
         }
         
         override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -58,7 +79,7 @@ class FindPasswordTable: UITableViewController, UITextFieldDelegate {
             if indexPath.section == 0{
                 return 50
             }
-            return 55
+            return Paramters.InputCodeButtonSize.1
         }
         
         
@@ -67,18 +88,7 @@ class FindPasswordTable: UITableViewController, UITextFieldDelegate {
             cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
             cell.selectionStyle = .none
             cell.setSelected(false, animated: false)
-            if indexPath.section == 2{
-                cell.backgroundColor = UIColor.groupTableViewBackground
-                LoginButton = UIButton(frame: CGRect(x: 0, y: 15, width: Paramters.LoginButtonSize.0, height: Paramters.LoginButtonSize.1))
-                cell.addSubview(LoginButton!)
-                LoginButton?.backgroundColor = UIColor.green
-                //            LoginButton?.addTarget(self, action:#selector(LoginServer(_:)), for:.touchUpInside)
-                //            LoginButton?.titleLabel?.backgroundColor = UIColor.black
-                LoginButton?.titleLabel?.font = UIFont.boldSystemFont(ofSize: 22)
-                LoginButton?.titleLabel?.textColor = UIColor.black
-                LoginButton?.setTitle("验证", for: UIControlState.normal)
-                
-            }
+            
             if indexPath.section == 0 {
                 let upsize = CGFloat(5)
                 RegisterPhone = UITextField(frame: CGRect(x: 85, y: upsize, width: Paramters.InputSize.0, height: Paramters.InputSize.1))
@@ -95,29 +105,16 @@ class FindPasswordTable: UITableViewController, UITextFieldDelegate {
                 RegisterPhone?.minimumFontSize=16
                 RegisterPhone?.adjustsFontSizeToFitWidth=true
                 RegisterPhone?.placeholder = "请输入手机号/邮箱"
+                if UserData.cur_login_id.characters.count > 0 {
+                    print("ssss = ",UserData.cur_login_id)
+                    RegisterPhone?.text = UserData.cur_login_id
+                }
                 RegisterPhone?.keyboardAppearance = .alert
                 RegisterPhone?.keyboardType  = .numberPad
             }else if indexPath.section == 1 {
-                let upsize = CGFloat(5)
-                InputCodeNumber = UITextField(frame: CGRect(x: 85, y: upsize, width: Paramters.CodeInputSize.0, height: Paramters.CodeInputSize.1))
-                let PwdLabel = UILabel(frame: CGRect(x: 10, y: upsize, width: 120, height: 40))
-                PwdLabel.font = UIFont.boldSystemFont(ofSize: 22)
-                cell.addSubview(PwdLabel)
-                PwdLabel.text = "验证码 "
-                //                PasswordField?.borderStyle = UITextBorderStyle.roundedRect
-                InputCodeNumber?.delegate=self
-                InputCodeNumber?.returnKeyType = UIReturnKeyType.join
-                
-                InputCodeNumber?.minimumFontSize=16
-                InputCodeNumber?.adjustsFontSizeToFitWidth=true
-                cell.addSubview(InputCodeNumber!)
-                InputCodeNumber?.keyboardAppearance = .alert
-                InputCodeNumber?.keyboardType  = .numberPad
-                InputCodeNumber?.font = UIFont.systemFont(ofSize: 18)
-                InputCodeNumber?.placeholder = "请输入验证码"
-                
-                SendButton = UIButton(frame: CGRect(x: Paramters.ScreenSize.width - Paramters.InputCodeButtonSize.0 - CGFloat(10), y: upsize, width: Paramters.InputCodeButtonSize.0, height: Paramters.InputCodeButtonSize.1))
+                SendButton = UIButton(frame: CGRect(x:0, y: 0, width: Paramters.ScreenSize.width, height: Paramters.InputCodeButtonSize.1))
                 SendButton?.backgroundColor = UIColor.green
+                SendButton?.addTarget(self, action:#selector(findPWD(_:)), for:.touchUpInside)
                 SendButton?.setTitle("发送验证码", for: UIControlState.normal)
                 cell.addSubview(SendButton!)
                 

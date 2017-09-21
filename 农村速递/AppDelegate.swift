@@ -98,7 +98,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserData.senditemshowids = UserData.converJSONTOIntArray(jsonData: data[11]["appids"])
         // 关于
         UserData.aboutText = data[12]["applan"+UserData.lantype].stringValue
-         
+        
+        UserData.newreptexts = UserData.converJSONTOStringArray(jsonData: data[15]["applan"+UserData.lantype])
+        
+        UserData.newrepids = UserData.converJSONTOIntArray(jsonData: data[15]["appids"])
+        // 服务的显示信息
+        let serverdata  = data[16]
+        let serdata     = serverdata["applan"+UserData.lantype]
+        let s1erdata    = serverdata["appids"]
+        UserData.servershowdics = UserData.converJSONTOStringArray(jsonData: serdata)
+        UserData.servershowids  = UserData.converJSONTOIntArray(jsonData: s1erdata)
+        
         return true
     }
     

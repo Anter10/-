@@ -54,20 +54,22 @@ class SetPasswordView: BaseTableViewController {
         par["changepwd"] = phone
         
         print(phone)
+        print("注册号码")
         Http.Post(url: Http.changepassword, data: par, call: sendCodeCall)
         
-        print("注册号码")
+        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        let upsize = CGFloat(5)
+        var upsize = CGFloat(5)
         if indexPath.section == 0{
+            upsize = CGFloat(6)
             RegisterPhone = UITextField(frame: CGRect(x: 125, y: upsize, width: Paramters.InputSize.0, height: Paramters.InputSize.1))
             let IdLabel = UILabel(frame: CGRect(x: 10, y: upsize, width: 120, height: 40))
             IdLabel.font = UIFont.boldSystemFont(ofSize: 22)
             cell.addSubview(IdLabel)
-            IdLabel.text = "设置密码:"
+            IdLabel.text = "密码: "
             cell.addSubview(RegisterPhone)
             RegisterPhone.font = UIFont.systemFont(ofSize: 18)
             //                PhoneOrEmailTextField?.borderStyle = UITextBorderStyle.roundedRect
@@ -80,7 +82,7 @@ class SetPasswordView: BaseTableViewController {
             RegisterPhone.keyboardAppearance = .alert
             RegisterPhone.keyboardType  = .numberPad
         }else{
-            var LoginButton = UIButton(frame: CGRect(x: 0, y: 15, width: Paramters.LoginButtonSize.0, height: Paramters.LoginButtonSize.1))
+            let LoginButton = UIButton(frame: CGRect(x: 0, y: 0, width: Paramters.LoginButtonSize.0, height: 50))
             cell.addSubview(LoginButton)
             LoginButton.backgroundColor = UIColor.green
             LoginButton.addTarget(self, action:#selector(setpwdcall(_:)), for:.touchUpInside)
@@ -100,6 +102,13 @@ class SetPasswordView: BaseTableViewController {
         }else{
             return 0
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0{
+            return 50
+        }
+        return 50
     }
 
     /*

@@ -161,6 +161,14 @@ class RegisterViewTable: UITableViewController, UITextFieldDelegate {
       
     }
     
+    
+    func registerCodeCall(data: JSON) -> Bool{
+        print("zenmehuishi",data[0]["id"])
+        let view = SetPasswordView()
+        self.navigationController?.pushViewController(view, animated: true)
+        return true
+    }
+    
     @objc func RegisterServer(_ sender: UIButton) -> Void {
         let phone = RegisterPhone?.text
         let code  = InputCodeNumber?.text
@@ -168,7 +176,7 @@ class RegisterViewTable: UITableViewController, UITextFieldDelegate {
         per["phoneoremail"] = phone!;
         per["codetype"]     = "102";
         per["code"]         = code!;
-        Http.Post(url: Http.verilphoneoreamilcode, data: per, call: sendCodeCall)
+        Http.Post(url: Http.verilphoneoreamilcode, data: per, call: registerCodeCall)
         
         
     }

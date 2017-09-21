@@ -39,7 +39,7 @@ class LifeTableView: BaseTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section < UserData.getUD().LifeBaseShowIds[section].count{
+        if section < UserData.getUD().LifeBaseShowIds[section].count - 1{
             return 10
         }
         return 0
@@ -57,7 +57,17 @@ class LifeTableView: BaseTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if(tableView.cellForRow(at: indexPath)?.tag == 103){
-           self.navigationController?.pushViewController(ExpressServerView(), animated: true)
+           let nav = ServerTableView()
+            nav.title = UserData.getUD().LifeBaseShowDics[indexPath.section][indexPath.row]
+           self.navigationController?.pushViewController(nav, animated: true)
+        }else if(tableView.cellForRow(at: indexPath)?.tag == 101){
+           let nav = NewRepView()
+            nav.title = UserData.getUD().LifeBaseShowDics[indexPath.section][indexPath.row]; self.navigationController?.pushViewController(nav, animated: true)
+        }else if(tableView.cellForRow(at: indexPath)?.tag == 102){
+            let nav = BuyCardView()
+            nav.title = UserData.getUD().LifeBaseShowDics[indexPath.section][indexPath.row]; self.navigationController?.pushViewController(nav, animated: true)
+            
+            
         }
     }
 

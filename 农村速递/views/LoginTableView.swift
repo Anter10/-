@@ -22,7 +22,7 @@ class LoginTableView: BaseTableViewController , UIGestureRecognizerDelegate, UIT
         print("______________________________进入应用__________________")
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-        self.title = "express.heisekeji.com"
+        self.title = "heisekeji.com"
         tap = UITapGestureRecognizer(target: self, action:#selector(cancelFocus(_:)))
         
         tap?.delegate = self
@@ -32,13 +32,16 @@ class LoginTableView: BaseTableViewController , UIGestureRecognizerDelegate, UIT
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
          let size = self.tableView.bounds
-        let IdLabel = UIButton(frame: CGRect(x: Paramters.ScreenWidthCenter - 60, y: size.height - 100, width: 120, height: 40))
-        IdLabel.titleLabel?.font = UIFont(name: "Arial", size: 14)
-        IdLabel.titleLabel?.textColor = UIColor.blue
-        IdLabel.setTitle("更多操作", for: UIControlState.normal)
-        IdLabel.setTitleColor(UIColor.blue, for: .normal)
-        self.view.addSubview(IdLabel)
-        IdLabel.addTarget(self, action:#selector(MoreCall(_:)), for:.touchUpInside)
+//        let IdLabel = UIButton(frame: CGRect(x: Paramters.ScreenWidthCenter - 60, y: size.height - 100, width: 120, height: 40))
+//        IdLabel.titleLabel?.font = UIFont(name: "Arial", size: 14)
+//        IdLabel.titleLabel?.textColor = UIColor.blue
+//        IdLabel.setTitle("更多操作", for: UIControlState.normal)
+//        IdLabel.setTitleColor(UIColor.blue, for: .normal)
+//
+//        self.view.addSubview(IdLabel)
+//        IdLabel.addTarget(self, action:#selector(MoreCall(_:)), for:.touchUpInside)
+//
+        self.navigationItem.rightBarButtonItem =  UIBarButtonItem(title: "更多操作", style: UIBarButtonItemStyle.done, target: self, action:#selector(MoreCall(_:)))
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -55,7 +58,7 @@ class LoginTableView: BaseTableViewController , UIGestureRecognizerDelegate, UIT
             per["id"]         = uid
             per["logintype"]  = "101"
             per["pwd"]        = upwd
-           
+            print("upwd.characters.count = ",uid.characters.count)
             if upwd.characters.count > 0 {
                pwdfield.text = upwd
             }else{
@@ -63,13 +66,19 @@ class LoginTableView: BaseTableViewController , UIGestureRecognizerDelegate, UIT
             }
             if uid.characters.count > 0 {
                idfield.text  = uid
+               UserData.cur_login_id = uid
             }else{
-               idfield.placeholder = "请输入账号"
+               idfield.placeholder = "请输入手机号"
             }
             
-            
+          
             Http.Post(url: Http.loginurl, data: per, call: logincallback)
+        
+        }else{
+            idfield.placeholder = "请输入手机号"
+            pwdfield.placeholder = "请输入密码"
         }
+        idfield.keyboardType = UIKeyboardType.numberPad
         print("什么情况是事实",dir)
     }
     //键盘的出现
@@ -258,7 +267,7 @@ class LoginTableView: BaseTableViewController , UIGestureRecognizerDelegate, UIT
         let forgetAction = UIAlertAction(title: "忘记密码", style: UIAlertActionStyle.default){
             (result : UIAlertAction) -> Void in
             let backButton = UIBarButtonItem()
-            backButton.title = "找回密码"
+            backButton.title = "登陆"
             self.navigationItem.backBarButtonItem = backButton
             let name = FindPasswordTable()
             self.show(name, sender: nil)
@@ -282,7 +291,7 @@ class LoginTableView: BaseTableViewController , UIGestureRecognizerDelegate, UIT
         
         alert.addAction(forgetAction)
         alert.addAction(okAction)
-        alert.addAction(codeAction)
+//        alert.addAction(codeAction)
         self.present(alert, animated: true)
     }
     

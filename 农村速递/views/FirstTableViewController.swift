@@ -33,8 +33,9 @@ class FirstTableViewController: BaseTableViewController, UISearchBarDelegate,UIG
         uiButton.setTitle(UserData.appshowtexts[2], for: .normal)
         
         tap = UITapGestureRecognizer(target: self, action:#selector(cancelFocus(_:)))
-        
+         print("self.tableView",self.tableView.frame)
         tap.delegate = self
+
         tap.numberOfTapsRequired = 1
         
        
@@ -73,7 +74,11 @@ class FirstTableViewController: BaseTableViewController, UISearchBarDelegate,UIG
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         
-        return 10
+        return 0
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

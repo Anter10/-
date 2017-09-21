@@ -35,7 +35,7 @@ class ReceiveAddressData{
     }
     
     func toString()-> String{
-        return province + city + controy + detail
+        return province + " " + city + " " + controy + " " + detail
     }
     
     func getEditData() -> Array<String> {

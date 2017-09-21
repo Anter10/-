@@ -36,20 +36,52 @@ class UserData: NSObject {
     public static var addreceiveshowids : [Int]  = []
     public static var addreceiveaddressshows : Array<String>  = []
     public static var addreceiveaddresssshowids : [Int]  = []
-    
+    public static var newrepids                     : [Int] = []
+    public static var newreptexts                   : [String] = []
     public static var senditemshows: Array<String> = []
     public static var senditemshowids: [Int] = []
     public static var aboutText = ""
-    
+    public static var servershowdics : [[String]] = []
+    public static var servershowids  : [[Int]]    = []
     public var LifeBaseShowDics:   [[String]] = []
     public var LifeBaseShowIds :   [[Int]] = []
-    
+    public static var cur_login_id: String = ""
     public var LifeServerDatas: [[LifeServerData]] = []
+    public static var NotifyDatas:Array<NotifyData> = []
+    // 商品分类数据
+    public var newshopclasssdatas:NSMutableDictionary = NSMutableDictionary()
     
-   
+    public static func getDictionaryFromJSONString(jsonString:String) ->NSDictionary{
+        
+        let jsonData:Data = jsonString.data(using: .utf8)!
+        
+        let dict = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
+        if dict != nil {
+            return dict as! NSDictionary
+        }
+        return NSDictionary()
+    }
     
     static func getUD()->UserData{
         return ud
+    }
+    
+//  添加新的新零售数据
+    func addNewShopClasssData(key: String, shopclasssdata: ShopThingClasss){
+        newshopclasssdatas.setValue(shopclasssdata, forKey: key)
+    }
+    
+   // 判断该类型的数据是否已经存在
+    func exitType(key:String) -> Bool{
+        if (newshopclasssdatas.value(forKey: key) != nil){
+            return true
+        }
+        return false
+    }
+    
+    func getShopThingClasss(key:String) -> ShopThingClasss {
+       
+        return newshopclasssdatas.value(forKey: key) as! ShopThingClasss
     }
     
     override init() {
@@ -62,6 +94,11 @@ class UserData: NSObject {
     // 清空收获地址
     public func clearReceivePerson(){
         linkperson = []
+    }
+    
+    // 清空收获地址
+    public static func clearNotifyDatas(){
+        NotifyDatas = []
     }
      
     public func getLifeBaseData()->[[String]]{

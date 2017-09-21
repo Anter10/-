@@ -17,17 +17,25 @@ class AllActivitysView: BaseTableViewController {
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
+        let cellXIB = UINib.init(nibName: "NotifyCell", bundle: Bundle.main)
+        self.tableView.register(cellXIB, forCellReuseIdentifier: "NotifyCell")
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         var para = Parameters()
-        para["mainid"] = UserData.getUD().personmsg.phone
-        para["tbid"]   = "106"
-        Http.Post(url: Http.sendalldataaction, data: para, call: callback)
+      
+        Http.Post(url: Http.getnotifyaction, data: para, call: callback)
     }
     
     func callback(data: JSON)-> Bool{
-        print("datadatadatadata = ",data)
+        UserData.clearNotifyDatas()
+        for (_,subJson):(String, JSON) in JSON(parseJSON:data.rawString()!) {
+            let notify = NotifyData(_id: subJson["id"].stringValue, _title: subJson["title"].stringValue, _showimage: subJson["showimage"].stringValue, _showmessage: subJson["showmessage"].stringValue, _notifytime: subJson["notifytime"].stringValue)
+            UserData.NotifyDatas.append(notify)
+        }
+          print("通知数据= ",data)
+        self.tableView.reloadData()
         return true
     }
     
@@ -41,23 +49,36 @@ class AllActivitysView: BaseTableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return UserData.NotifyDatas.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return 1
     }
-
-    /*
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0{
+            return 0
+        }
+        return 2
+    }
+   
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 281
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NotifyCell", for: indexPath) as! NotifyCell
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        
+        cell.title.text = UserData.NotifyDatas[indexPath.section].tilte
+        cell.notifytime.text = UserData.NotifyDatas[indexPath.section].notifytime
+        cell.showmessage.text = UserData.NotifyDatas[indexPath.section].showmessage
+        cell.loadTexture(imagedata: UserData.NotifyDatas[indexPath.section].pngdatas!)
         // Configure the cell...
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.

@@ -12,8 +12,8 @@ import SwiftyJSON
 class Http  {
     
     // 请求地址
-    static let postip : String = "http://192.168.43.68:8083/hskj-express/"
-//    static let postip : String = "http://express.heisekeji.net/"
+//    static let postip : String = "http://192.168.43.68:8083/hskj-express/"
+    static let postip : String = "http://express.heisekeji.net/"
     // 发送Http请求
     static func Post(url: String, data: Parameters, call:@escaping (JSON)->Bool){
         var data = data
@@ -43,7 +43,7 @@ class Http  {
     //    注册的时候发送验证码
     static let sendregistercode : String      = Http.postip      + "getcode"
     //    验证发送的验证码是否正确
-    static let verilphoneoreamilcode : String = Http.postip + "vailphoneoremailcode"
+    static let verilphoneoreamilcode : String = Http.postip + "verilphoneoreamilcode"
     //    修改密码
     static let changepassword : String        = Http.postip        + "changepassword"
     //    添加联系人
@@ -70,6 +70,8 @@ class Http  {
     static let updatereceiveaddressaction: String = Http.postip + "updatereceiveaddressaction"
     //    更新收件人信息
     static let updatereceivepersonaction: String  = Http.postip + "updatereceivepersonaction"
-    
-    
+    //    获得通知信息
+    static let getnotifyaction: String            = Http.postip + "getnotifyaction"
+   //     商品数据
+    static let getshoplistdata: String            = Http.postip  + "getshoplistdata"
 }

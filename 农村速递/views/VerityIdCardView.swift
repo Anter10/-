@@ -17,6 +17,7 @@ class VerityIdCardView: BaseTableViewController, UIGestureRecognizerDelegate {
     var tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(cancelFocus(_:)))
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.isScrollEnabled = false
         self.navigationItem.rightBarButtonItem =  UIBarButtonItem(title: UserData.appshowtexts[4], style: UIBarButtonItemStyle.done, target: self, action:#selector(okidcard))
         tap = UITapGestureRecognizer(target: self, action:#selector(cancelFocus(_:)))
         tap.delegate = self
